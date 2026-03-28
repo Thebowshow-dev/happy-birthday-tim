@@ -4,523 +4,902 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Tim!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --red: #cc0000;
+            --red-dark: #8b0000;
+            --gold: #d4af37;
+            --gold-light: #ffd700;
+            --black: #0a0a0a;
+            --card-bg: rgba(20, 5, 5, 0.92);
+            --text: #e8e8e8;
+            --text-dim: #999;
+            --orange: #ff6b35;
         }
 
+        html { scroll-behavior: smooth; }
+
         body {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b1b 100%);
-            color: #e0e0e0;
+            background: var(--black);
+            background-image:
+                radial-gradient(ellipse at 20% 50%, rgba(139,0,0,0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(139,0,0,0.08) 0%, transparent 40%);
+            color: var(--text);
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        .progress-tracker {
+        /* Progress Tracker */
+        #progress-tracker {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(20, 20, 20, 0.9);
-            border: 2px solid #d4af37;
+            top: 12px;
+            right: 12px;
+            background: rgba(8,8,8,0.97);
+            border: 2px solid var(--gold);
             border-radius: 8px;
-            padding: 12px 16px;
+            padding: 10px 13px;
             font-family: 'Press Start 2P', cursive;
-            font-size: 10px;
-            color: #d4af37;
-            z-index: 1000;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            font-size: 7px;
+            color: var(--gold);
+            z-index: 9999;
+            box-shadow: 0 0 20px rgba(212,175,55,0.25);
+            min-width: 120px;
         }
+        .prog-label { margin-bottom: 5px; }
+        .prog-track { width: 100%; height: 7px; background: #1a1a1a; border-radius: 3px; overflow: hidden; border: 1px solid var(--gold); }
+        .prog-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--gold), var(--orange)); transition: width 0.5s ease; }
+        #unlock-hint { margin-top: 5px; font-size: 6px; color: var(--orange); display: none; }
 
-        .progress-bar {
-            width: 100px;
-            height: 6px;
-            background: #333;
-            border: 1px solid #d4af37;
-            border-radius: 3px;
-            margin-top: 8px;
-            overflow: hidden;
+        /* Layout */
+        .page-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 70px 20px;
         }
+        .container { max-width: 900px; margin: 0 auto; width: 100%; }
 
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #d4af37, #ff6b35);
-            width: 0%;
-            transition: width 0.3s ease;
+        .section-card {
+            background: var(--card-bg);
+            border: 2px solid var(--red);
+            border-radius: 12px;
+            padding: 36px 28px;
+            box-shadow: 0 8px 40px rgba(139,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.04);
         }
+        .section-card.gold-border { border-color: var(--gold); box-shadow: 0 8px 40px rgba(212,175,55,0.15); }
 
-        header {
-            text-align: center;
-            padding: 60px 20px 40px;
-            background: linear-gradient(180deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0) 100%);
-            border-bottom: 2px solid #d4af37;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        h1 {
-            font-family: 'Bangers', cursive;
-            font-size: 3.5em;
-            color: #ffd700;
-            text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.8), 6px 6px 0px rgba(212, 175, 55, 0.3);
-            margin-bottom: 10px;
-            animation: bounce 0.6s ease-in-out;
-        }
-
-        .subtitle {
-            font-size: 1.2em;
-            color: #ff6b35;
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .section {
-            background: rgba(30, 30, 30, 0.8);
-            border: 2px solid #d4af37;
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        .section h2 {
+        /* Typography */
+        h2.section-title {
             font-family: 'Press Start 2P', cursive;
-            font-size: 1.5em;
-            color: #d4af37;
-            margin-bottom: 20px;
+            font-size: clamp(0.7em, 2vw, 1.1em);
+            color: var(--gold);
+            margin-bottom: 22px;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
-        button {
-            background: linear-gradient(135deg, #d4af37 0%, #ff6b35 100%);
-            color: #000;
-            border: none;
-            padding: 12px 24px;
-            font-size: 1em;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.2s, box-shadow 0.2s;
-            font-family: 'Inter', sans-serif;
-        }
-
-        button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-        }
-
-        button:active {
-            transform: scale(0.95);
-        }
-
-        .result-display {
-            background: rgba(0, 0, 0, 0.5);
-            border: 2px solid #ff6b35;
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 20px;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2em;
-            font-weight: bold;
-            word-wrap: break-word;
-            font-family: 'Courier New', monospace;
-        }
-
-        .result-display.hidden {
-            display: none;
-        }
-
-        .loot-box {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #d4af37 0%, #ffd700 100%);
-            border: 3px solid #8b7500;
-            border-radius: 8px;
-            margin: 20px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3em;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4), inset 0 -2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .loot-box:hover {
-            transform: scale(1.1) rotateY(10deg);
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6), inset 0 -2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .loot-box:active {
-            transform: scale(0.95);
-            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3), inset 0 -1px 3px rgba(0, 0, 0, 0.3);
-        }
-
-        .pokemon-card {
-            width: 300px;
-            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
-            border: 2px solid #333;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 20px auto;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .pokemon-card h3 {
-            color: #333;
-            margin: 10px 0;
-            font-size: 1.3em;
-        }
-
-        .pokemon-card p {
-            color: #666;
-            margin: 5px 0;
-            font-size: 0.9em;
-        }
-
-        .pokemon-image {
-            width: 150px;
-            height: 150px;
-            margin: 10px auto;
-            background: #eee;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .pokemon-image img {
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-        .pokemon-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 15px 0;
-        }
-
-        .stat {
-            background: #f5f5f5;
-            padding: 8px;
-            border-radius: 4px;
-            font-size: 0.85em;
-            color: #333;
-        }
-
-        .stat-label {
-            font-weight: bold;
-            color: #d4af37;
-        }
-
-        input[type="text"], input[type="number"], select {
-            padding: 10px;
-            margin: 10px 0;
-            border: 2px solid #d4af37;
-            border-radius: 5px;
-            background: rgba(0, 0, 0, 0.3);
-            color: #e0e0e0;
-            font-size: 1em;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        input[type="text"]::placeholder, input[type="number"]::placeholder {
-            color: #999;
-        }
-
-        input[type="text"]:focus, input[type="number"]:focus, select:focus {
-            outline: none;
-            border-color: #ff6b35;
-            box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
-        }
-
-        .section-divider {
-            border-top: 2px solid #d4af37;
-            margin: 30px 0;
-        }
-
-        .party-head {
-            width: 80px;
-            height: 80px;
-            margin: 10px;
+        /* Buttons */
+        .btn {
             display: inline-block;
-            text-align: center;
-            line-height: 80px;
-            font-size: 2em;
-            background: rgba(212, 175, 55, 0.2);
-            border: 2px solid #d4af37;
-            border-radius: 50%;
+            padding: 13px 26px;
+            font-family: 'Bangers', cursive;
+            font-size: 1.5em;
+            letter-spacing: 2px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
         }
-
-        .party-container {
-            text-align: center;
-            margin: 20px 0;
+        .btn:hover { transform: scale(1.05); }
+        .btn:active { transform: scale(0.97); }
+        .btn-red {
+            background: linear-gradient(135deg, #aa0000, #ff2222, #aa0000);
+            color: white;
+            box-shadow: 0 4px 15px rgba(204,0,0,0.5);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
+        .btn-red:hover { box-shadow: 0 6px 25px rgba(255,0,0,0.65); }
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+            color: #0a0a0a;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.4);
+            font-weight: bold;
+        }
+        .btn-gold:hover { box-shadow: 0 6px 25px rgba(255,215,0,0.65); }
 
-        .insult-display {
-            background: rgba(255, 107, 53, 0.1);
-            border-left: 4px solid #ff6b35;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 4px;
+        /* Images */
+        .section-img { max-width: 100%; border-radius: 8px; display: block; margin: 0 auto; }
+        .section-img.medium { max-width: 480px; }
+        .section-img.small { max-width: 300px; }
+
+        /* ---- HERO ---- */
+        #hero {
+            background: radial-gradient(ellipse at center, rgba(139,0,0,0.18) 0%, transparent 65%),
+                        linear-gradient(180deg, #0a0000 0%, var(--black) 100%);
+            text-align: center;
+            padding-top: 80px;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: var(--red);
+            color: white;
+            font-family: 'Bangers', cursive;
+            font-size: 1.1em;
+            padding: 5px 18px;
+            border-radius: 20px;
+            margin-bottom: 18px;
+            letter-spacing: 2px;
+            animation: pulse-red 2s ease-in-out infinite;
+        }
+        @keyframes pulse-red {
+            0%,100% { box-shadow: 0 0 16px rgba(204,0,0,0.5); }
+            50% { box-shadow: 0 0 36px rgba(255,0,0,0.8); }
+        }
+        .hero-title {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(3.5em, 14vw, 9em);
+            color: var(--gold-light);
+            text-shadow: 4px 4px 0 var(--red-dark), 8px 8px 0 rgba(0,0,0,0.5), 0 0 50px rgba(255,215,0,0.25);
+            line-height: 0.95;
+            letter-spacing: 3px;
+            margin-bottom: 16px;
+        }
+        .hero-subtitle {
+            font-size: clamp(0.95em, 2.5vw, 1.3em);
+            color: var(--orange);
             font-style: italic;
-            color: #ffb3a1;
+            margin-bottom: 24px;
+            padding: 0 10px;
+        }
+        .hero-notice {
+            display: inline-block;
+            background: rgba(212,175,55,0.08);
+            border: 2px dashed var(--gold);
+            border-radius: 8px;
+            padding: 14px 22px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(0.5em, 1.3vw, 0.7em);
+            color: var(--gold);
+            line-height: 2;
+            max-width: 580px;
+            margin-bottom: 28px;
+        }
+        .hero-fig-img {
+            max-width: 320px;
+            width: 100%;
+            border-radius: 10px;
+            border: 3px solid rgba(212,175,55,0.4);
+            margin: 24px auto 0;
+            display: block;
+            opacity: 0.85;
+        }
+        .hero-fig-caption {
+            color: var(--text-dim);
+            font-size: 0.8em;
+            font-style: italic;
+            margin-top: 8px;
+        }
+        .scroll-hint {
+            margin-top: 36px;
+            color: var(--gold);
+            font-size: 0.85em;
+            animation: bob 1.6s ease-in-out infinite;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.6em;
+        }
+        @keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(9px)} }
+
+        /* ---- SCAN ---- */
+        .scanner-box {
+            display: none;
+            margin-top: 22px;
+            background: rgba(0,0,0,0.85);
+            border: 2px solid var(--red);
+            border-radius: 8px;
+            padding: 22px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.65em;
+            color: var(--red);
+        }
+        .scan-track { height: 18px; background: #111; border: 2px solid var(--red); border-radius: 3px; overflow: hidden; margin: 12px 0; }
+        .scan-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--red), #ff4444, var(--red));
+            background-size: 200% 100%;
+            width: 0%;
+            transition: width 0.6s ease;
+            animation: shimmer 1s linear infinite;
+        }
+        @keyframes shimmer { 0%{background-position:0% 0} 100%{background-position:200% 0} }
+        .scan-result {
+            display: none;
+            text-align: center;
+            margin-top: 22px;
+            animation: fadeInUp 0.5s ease;
+        }
+        .scan-result-text {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(2.5em, 8vw, 4.5em);
+            color: var(--gold-light);
+            text-shadow: 3px 3px 0 var(--red-dark);
+            animation: result-pop 0.5s cubic-bezier(0.36,0.07,0.19,0.97);
+        }
+        @keyframes result-pop {
+            0%{transform:scale(0) rotate(-10deg)} 60%{transform:scale(1.2) rotate(4deg)} 100%{transform:scale(1) rotate(0)}
+        }
+
+        /* ---- CHART ---- */
+        .chart-row { display: flex; align-items: center; margin-bottom: 18px; gap: 10px; }
+        .chart-label { min-width: 190px; font-size: 0.82em; color: var(--text-dim); text-align: right; flex-shrink: 0; }
+        .chart-bar-track { flex: 1; height: 38px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; overflow: visible; position: relative; }
+        .chart-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            width: 0%;
+            transition: width 1.5s cubic-bezier(0.25,0.46,0.45,0.94);
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            font-size: 0.82em;
+            color: rgba(255,255,255,0.7);
+            position: relative;
+            white-space: nowrap;
+        }
+        .bar-zero { background: rgba(80,80,80,0.5); }
+        .bar-brittany { background: linear-gradient(90deg, #9b59b6, #e91e8c); color: white; }
+        .bar-josh { background: linear-gradient(90deg, var(--gold), var(--gold-light)); color: #0a0a0a; font-weight: 700; }
+        .josh-profile { width: 56px; height: 56px; border-radius: 50%; border: 3px solid var(--gold); object-fit: cover; box-shadow: 0 0 14px rgba(212,175,55,0.5); flex-shrink: 0; }
+        .sparkles-wrap { position: absolute; top: 0; right: -10px; pointer-events: none; display: none; }
+        .sparkle { position: absolute; animation: spk 1s ease-in-out infinite; font-size: 1.3em; }
+        @keyframes spk { 0%,100%{transform:translateY(0) scale(1);opacity:1} 50%{transform:translateY(-8px) scale(1.2);opacity:0.8} }
+
+        /* ---- POKEMON ---- */
+        .poke-wrap { display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap; justify-content: center; }
+        .poke-img-col { flex: 1; min-width: 240px; max-width: 380px; }
+        .poke-img-col img { width: 100%; border-radius: 12px; box-shadow: 0 0 30px rgba(212,175,55,0.35); border: 3px solid var(--gold); }
+        .poke-stats-col { flex: 1; min-width: 240px; background: rgba(0,0,0,0.6); border: 2px solid var(--gold); border-radius: 12px; padding: 22px; }
+        .poke-stats-col h3 { font-family: 'Bangers', cursive; font-size: 2.4em; color: var(--gold-light); margin-bottom: 2px; }
+        .poke-hp { color: var(--red); font-weight: 700; font-size: 1.05em; }
+        .poke-stage { color: var(--text-dim); font-size: 0.82em; font-style: italic; margin-bottom: 14px; }
+        .poke-move { background: rgba(204,0,0,0.12); border: 1px solid rgba(204,0,0,0.4); border-radius: 6px; padding: 9px 12px; margin-bottom: 9px; }
+        .poke-move-name { font-weight: 700; color: var(--orange); }
+        .poke-move-dmg { color: var(--gold); float: right; font-weight: 700; }
+        .poke-move-desc { font-size: 0.78em; color: var(--text-dim); clear: both; margin-top: 3px; }
+        .poke-meta { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.78em; color: var(--text-dim); }
+        .poke-meta-row { display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .poke-flavor { font-style: italic; color: var(--text-dim); border-left: 3px solid var(--gold); padding-left: 10px; margin-top: 12px; font-size: 0.8em; line-height: 1.6; }
+        .poke-set { text-align: right; margin-top: 8px; font-family: 'Press Start 2P', cursive; font-size: 0.55em; color: var(--gold); }
+
+        /* ---- HIGH JUMP ---- */
+        .highjump-section { text-align: center; }
+        .highjump-section img { max-width: 500px; width: 100%; border-radius: 8px; border: 3px solid var(--red); box-shadow: 0 0 28px rgba(204,0,0,0.28); margin: 18px auto; display: block; }
+        .highjump-main { font-family: 'Bangers', cursive; font-size: clamp(2em, 7vw, 3.2em); color: var(--gold-light); text-shadow: 3px 3px 0 var(--red-dark); }
+        .highjump-sub { color: var(--text-dim); font-style: italic; margin-top: 8px; }
+
+        /* ---- COMPLIMENT GENERATOR ---- */
+        .compliment-display {
+            background: rgba(0,0,0,0.5); border: 2px solid var(--gold); border-radius: 8px;
+            padding: 22px; margin-top: 18px; min-height: 70px; display: flex; align-items: center;
+            justify-content: center; text-align: center; font-size: 1.05em; font-style: italic;
+            color: var(--text); transition: opacity 0.25s;
+        }
+        .compliment-display.hidden { display: none; }
+        .compliment-counter { text-align: right; margin-top: 6px; font-family: 'Press Start 2P', cursive; font-size: 0.6em; color: var(--text-dim); }
+        .compliment-counter.hidden { display: none; }
+
+        /* ---- QUIZ ---- */
+        .quiz-q { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 18px; margin-bottom: 18px; }
+        .quiz-q p { font-weight: 700; color: var(--gold); margin-bottom: 10px; font-size: 1.05em; }
+        .quiz-opts { display: flex; flex-direction: column; gap: 7px; }
+        .quiz-opt {
+            background: rgba(255,255,255,0.04); border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 6px; padding: 9px 14px; cursor: pointer; transition: all 0.2s;
+            text-align: left; color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.92em;
+        }
+        .quiz-opt:hover { background: rgba(204,0,0,0.18); border-color: var(--red); }
+        .quiz-opt.selected { background: rgba(212,175,55,0.18); border-color: var(--gold); }
+        .quiz-result {
+            display: none; text-align: center; padding: 28px;
+            background: rgba(0,0,0,0.55); border: 3px solid var(--gold); border-radius: 12px; margin-top: 18px;
+        }
+        .quiz-result h3 { font-family: 'Bangers', cursive; font-size: 2.4em; color: var(--gold-light); margin-bottom: 10px; }
+        .quiz-result img { max-width: 380px; width: 100%; border-radius: 8px; margin-top: 14px; }
+
+        /* ---- WAFFLE HOUSE ---- */
+        .waffle-card {
+            background: linear-gradient(135deg, #0d0d1a 0%, #1a1a0d 100%);
+            border: 3px solid var(--gold); border-radius: 16px; padding: 38px 32px;
+            text-align: center; box-shadow: 0 0 40px rgba(212,175,55,0.18), inset 0 1px 0 rgba(255,255,255,0.04);
+            position: relative; overflow: hidden;
+        }
+        .waffle-card::before { content:''; position: absolute; top:0; left:0; right:0; height:4px; background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold)); }
+        .waffle-header { font-family: 'Bangers', cursive; font-size: 1.8em; color: var(--gold-light); letter-spacing: 4px; margin-bottom: 6px; }
+        .waffle-venue { font-family: 'Bangers', cursive; font-size: clamp(2.5em, 8vw, 4em); color: white; text-shadow: 3px 3px 0 rgba(212,175,55,0.4); }
+        .waffle-details { margin: 22px 0; padding: 18px; background: rgba(0,0,0,0.4); border-radius: 8px; text-align: left; }
+        .waffle-details p { margin-bottom: 7px; font-size: 0.97em; }
+        .waffle-label { color: var(--gold); font-weight: 700; font-family: 'Bangers', cursive; font-size: 1.15em; }
+        .rsvp-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 22px; }
+        .rsvp-response { display: none; margin-top: 18px; padding: 14px; background: rgba(212,175,55,0.08); border: 2px solid var(--gold); border-radius: 8px; font-size: 0.97em; }
+
+        /* ---- CLOSER ---- */
+        #closer { background: linear-gradient(180deg, var(--black) 0%, #0d0b07 50%, #1a1509 100%); }
+        .closer-main { width: 100%; max-width: 580px; border-radius: 12px; border: 3px solid var(--gold); box-shadow: 0 0 40px rgba(212,175,55,0.25); display: block; margin: 0 auto 22px; }
+        .closer-smalls { display: flex; gap: 14px; justify-content: center; margin-bottom: 28px; flex-wrap: wrap; }
+        .closer-smalls img { width: 46%; max-width: 260px; border-radius: 8px; border: 2px solid rgba(212,175,55,0.4); }
+        .closer-text { max-width: 680px; margin: 0 auto; background: rgba(20,15,5,0.92); border: 2px solid rgba(212,175,55,0.25); border-radius: 12px; padding: 30px; font-size: 1.08em; line-height: 1.9; color: #d4c9a8; }
+        .closer-text p+p { margin-top: 14px; }
+
+        /* ---- LOOT BOX ---- */
+        #lootbox { display: none; text-align: center; background: linear-gradient(180deg, #0a0800 0%, var(--black) 100%); }
+        .loot-visual {
+            width: 140px; height: 140px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light), #b8860b);
+            border: 4px solid #8b7500; border-radius: 12px;
+            margin: 28px auto; display: flex; align-items: center; justify-content: center;
+            font-size: 3.8em; cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 8px 30px rgba(212,175,55,0.45), inset 0 2px 0 rgba(255,255,255,0.28);
+            animation: loot-pulse 2s ease-in-out infinite;
+        }
+        @keyframes loot-pulse {
+            0%,100%{box-shadow:0 8px 30px rgba(212,175,55,0.45),inset 0 2px 0 rgba(255,255,255,0.28)}
+            50%{box-shadow:0 14px 50px rgba(255,215,0,0.75),inset 0 2px 0 rgba(255,255,255,0.35)}
+        }
+        .loot-visual:hover { transform: scale(1.08) rotate(2deg); }
+        .loot-visual:active { transform: scale(0.94); animation: none; }
+        @keyframes loot-shake {
+            0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px) rotate(-3deg)} 40%{transform:translateX(8px) rotate(3deg)} 60%{transform:translateX(-6px)} 80%{transform:translateX(6px)}
+        }
+        .coupon-card {
+            display: none; max-width: 480px; margin: 0 auto;
+            background: linear-gradient(135deg, #fefefe, #f5f0e8);
+            border: 4px dashed var(--gold); border-radius: 16px;
+            padding: 28px; color: #111; text-align: center;
+            box-shadow: 0 0 50px rgba(212,175,55,0.45);
+            animation: coupon-appear 0.5s cubic-bezier(0.36,0.07,0.19,0.97);
+        }
+        @keyframes coupon-appear {
+            0%{transform:scale(0) rotate(-14deg);opacity:0} 60%{transform:scale(1.08) rotate(2deg)} 100%{transform:scale(1) rotate(0);opacity:1}
+        }
+        .coupon-header { font-family: 'Bangers', cursive; font-size: 3em; color: var(--red); letter-spacing: 4px; }
+        .coupon-issuer { width: 78px; height: 78px; border-radius: 50%; border: 3px solid var(--gold); object-fit: cover; margin: 14px auto; display: block; }
+        .coupon-body { font-size: 1.2em; font-weight: 700; margin: 10px 0; color: #111; }
+        .coupon-details { font-size: 0.88em; color: #444; margin: 6px 0; }
+        .coupon-fine { font-size: 0.62em; color: #888; margin-top: 18px; border-top: 1px dashed #ccc; padding-top: 10px; line-height: 1.7; }
+
+        /* Utilities */
+        @keyframes fadeInUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+        .fade-in { animation: fadeInUp 0.6s ease forwards; }
+        .hidden { display: none !important; }
+
+        @media (max-width: 600px) {
+            .page-section { padding: 42px 14px; }
+            .section-card { padding: 22px 14px; }
+            .chart-label { min-width: 110px; font-size: 0.72em; }
+            .poke-wrap { flex-direction: column; }
+            #progress-tracker { top: 6px; right: 6px; padding: 7px 9px; }
+            .waffle-card { padding: 22px 14px; }
+            .closer-smalls img { width: 48%; }
         }
     </style>
 </head>
 <body>
-    <div class="progress-tracker">
-        PROGRESS
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
+
+<!-- PROGRESS TRACKER -->
+<div id="progress-tracker">
+    <div class="prog-label">DONE: <span id="prog-count">0</span>/6</div>
+    <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+    <div id="unlock-hint">&#127873; LOOT UNLOCKED!</div>
+</div>
+
+<!-- ===== SECTION 1: HERO ===== -->
+<section id="hero" class="page-section">
+    <div class="container" style="text-align:center;">
+        <div class="hero-badge">MARCH 28 -- OFFICIAL BIRTHDAY</div>
+        <h1 class="hero-title">HAPPY<br>BIRTHDAY<br>TIM</h1>
+        <p class="hero-subtitle">"Yes, someone made you a whole website. No, you don't deserve it."</p>
+        <div class="hero-notice">
+            Complete all sections to unlock your birthday present at the bottom.
         </div>
+        <img src="./figure_it_out.jpeg" alt="Tim figuring it out" class="hero-fig-img">
+        <p class="hero-fig-caption">Tim figuring out how old he is.</p>
+        <p class="scroll-hint">v v v SCROLL DOWN v v v</p>
     </div>
+</section>
 
-    <header>
-        <h1>Happy Birthday Tim!</h1>
-        <p class="subtitle">A celebration of questionable taste and even worse puns</p>
-    </header>
-
+<!-- ===== SECTION 2: SCIENTIFIC TEST ===== -->
+<section class="page-section" id="section-2">
     <div class="container">
-        <!-- Loot Box Section -->
-        <div class="section">
-            <h2>Loot Box - Click to Open</h2>
-            <p>Click the golden box to see what Tim might win:</p>
-            <div class="loot-box" id="lootBox">📦</div>
-            <div class="result-display hidden" id="lootResult"></div>
-        </div>
-
-        <!-- Insult Generator Section -->
-        <div class="section">
-            <h2>The Insult Generator</h2>
-            <p>Generate a unique roast for Tim:</p>
-            <button onclick="generateInsult()">Generate Insult</button>
-            <div class="result-display hidden" id="insultResult"></div>
-            <div id="insultDisplay"></div>
-        </div>
-
-        <!-- Pokemon Card Section -->
-        <div class="section">
-            <h2>Tim's Pokemon Card</h2>
-            <p>What Pokemon is Tim?</p>
-            <button onclick="generatePokemonCard()">Generate Tim's Pokemon</button>
-            <div id="pokemonDisplay"></div>
-        </div>
-
-        <!-- Image Gallery Section -->
-        <div class="section">
-            <h2>Image Gallery</h2>
-            <p>Some memorable moments:</p>
-            <div id="imageGallery"></div>
+        <div class="section-card">
+            <h2 class="section-title">The Scientific Test</h2>
+            <img src="./ackbar.jpeg" alt="It's a trap!" class="section-img medium">
+            <p style="text-align:center;color:var(--text-dim);font-style:italic;margin:14px 0 22px;">
+                This is a 100% legitimate scientific assessment. Nothing suspicious here.
+            </p>
+            <div style="text-align:center;">
+                <button class="btn btn-red" id="scan-btn" onclick="startScan()">
+                    Click Here for Your Scientific Assessment Results
+                </button>
+            </div>
+            <div class="scanner-box" id="scanner-box">
+                <div id="scan-text">Initializing assessment...</div>
+                <div class="scan-track"><div class="scan-fill" id="scan-fill"></div></div>
+                <div style="color:var(--text-dim);font-size:0.7em;margin-top:6px;">DO NOT CLOSE TAB - ASSESSMENT IN PROGRESS</div>
+            </div>
+            <div class="scan-result" id="scan-result">
+                <div class="scan-result-text">RESULTS: Yes. Obviously.</div>
+                <p style="color:var(--text-dim);font-style:italic;margin:10px 0;">The science is settled. The data is in. There was never any doubt.</p>
+                <img src="./picard_happy.jpeg" alt="Picard is satisfied" class="section-img medium" style="margin-top:20px;">
+            </div>
         </div>
     </div>
+</section>
 
-    <script>
-        // Initialize progress tracker
-        const progressFill = document.querySelector('.progress-fill');
-        let completedTasks = 0;
-        const totalTasks = 4; // Loot box, insult, pokemon, images
-
-        function updateProgress() {
-            const percentage = (completedTasks / totalTasks) * 100;
-            progressFill.style.width = percentage + '%';
-        }
-
-        // Loot Box Logic
-        const lootItems = [
-            "A lifetime supply of bad decisions",
-            "The ability to read your own handwriting (cursed)",
-            "A participation trophy from 1987",
-            "Socks that always go missing",
-            "The sacred knowledge of why birds aren't real",
-            "A coupon for 0% off anything",
-            "Tim's dignity (sorry, out of stock)",
-            "The power to stub your toe regularly",
-            "A genuine compliment from the internet",
-            "A void of purpose and meaning (jk, you got friends)",
-            "A signed photo of yourself (unsigned)",
-            "The ability to organize your life (placeholder)",
-            "A refund for your birth certificate",
-            "A lifetime of 404 errors",
-            "The secrets of the universe (terms & conditions apply)",
-            "A gift card to a store that doesn't exist",
-            "Proof that aliens visit Florida",
-            "A time machine (broken)",
-            "The blueprints to happiness (assembly required)"
-        ];
-
-        const lootBox = document.getElementById('lootBox');
-        const lootResult = document.getElementById('lootResult');
-
-        lootBox.addEventListener('click', function() {
-            const randomLoot = lootItems[Math.floor(Math.random() * lootItems.length)];
-            lootResult.textContent = `"${randomLoot}"`;
-            lootResult.classList.remove('hidden');
-            playSuccessSound();
-            confetti();
-            completedTasks = Math.max(completedTasks, 1);
-            updateProgress();
-        });
-
-        // Insult Generator
-        const insultAdjectives = [
-            "magnificently confused",
-            "spectacularly average",
-            "delightfully obsolete",
-            "charming disaster",
-            "wonderfully lost",
-            "perfectly unremarkable",
-            "gloriously mediocre",
-            "epically forgettable",
-            "exceptionally peculiar"
-        ];
-
-        const insultNouns = [
-            "piece of software",
-            "life choice",
-            "birthday attempt",
-            "existence",
-            "sense of direction",
-            "fashion statement",
-            "joke at a dinner party",
-            "conversation starter",
-            "reference in a conversation"
-        ];
-
-        const insultVerbs = [
-            "confuses",
-            "baffles",
-            "perplexes",
-            "astounds",
-            "mystifies",
-            "bewilders",
-            "surprises",
-            "leaves people wondering about"
-        ];
-
-        function generateInsult() {
-            const adj = insultAdjectives[Math.floor(Math.random() * insultAdjectives.length)];
-            const noun = insultNouns[Math.floor(Math.random() * insultNouns.length)];
-            const verb = insultVerbs[Math.floor(Math.random() * insultVerbs.length)];
-
-            const insult = `Tim, you are a ${adj} ${noun} that ${verb} everyone around you.`;
-            const insultDisplay = document.getElementById('insultDisplay');
-            insultDisplay.innerHTML = `<div class="insult-display">${insult}</div>`;
-            
-            completedTasks = Math.max(completedTasks, 2);
-            updateProgress();
-            playSuccessSound();
-        }
-
-        // Pokemon Card Generator
-        const pokemonTraits = [
-            { name: "Timosaurus", type: "Dragon/Confused", hp: 45, attack: 72, defense: 66 },
-            { name: "Confusdle", type: "Psychic/Lost", hp: 58, attack: 62, defense: 55 },
-            { name: "Awkwardile", type: "Normal/Shy", hp: 52, attack: 48, defense: 48 },
-            { name: "Questionmark", type: "Fairy/Mystery", hp: 65, attack: 58, defense: 65 },
-            { name: "Paradoxian", type: "Psychic/Paradox", hp: 55, attack: 67, defense: 72 },
-            { name: "Timidly", type: "Grass/Nervous", hp: 48, attack: 65, defense: 45 },
-            { name: "Blunderblast", type: "Electric/Chaotic", hp: 64, attack: 80, defense: 50 },
-            { name: "Enigmon", type: "Water/Enigma", hp: 62, attack: 66, defense: 68 }
-        ];
-
-        function generatePokemonCard() {
-            const pokemon = pokemonTraits[Math.floor(Math.random() * pokemonTraits.length)];
-            const pokemonDisplay = document.getElementById('pokemonDisplay');
-            
-            pokemonDisplay.innerHTML = `
-                <div class="pokemon-card">
-                    <h3>${pokemon.name}</h3>
-                    <p style="color: #ff6b35;"><strong>Type:</strong> ${pokemon.type}</p>
-                    <div class="pokemon-image">
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="${pokemon.name}">
-                    </div>
-                    <div class="pokemon-stats">
-                        <div class="stat"><span class="stat-label">HP</span><br>${pokemon.hp}</div>
-                        <div class="stat"><span class="stat-label">ATK</span><br>${pokemon.attack}</div>
-                        <div class="stat"><span class="stat-label">DEF</span><br>${pokemon.defense}</div>
-                        <div class="stat"><span class="stat-label">SPE</span><br>${Math.floor(Math.random() * 80) + 30}</div>
+<!-- ===== SECTION 3: FRIENDSHIP CHART ===== -->
+<section class="page-section" id="section-3">
+    <div class="container">
+        <div class="section-card">
+            <h2 class="section-title">Friendship Chart</h2>
+            <p style="font-size:1.1em;font-weight:700;margin-bottom:26px;color:var(--text);">
+                Which of Tim's Friends Made Him an Entire Website
+            </p>
+            <div id="chart-area">
+                <div class="chart-row">
+                    <div class="chart-label">Chad from work</div>
+                    <div class="chart-bar-track">
+                        <div class="chart-bar-fill bar-zero" data-target="2">0 websites</div>
                     </div>
                 </div>
-            `;
-            
-            const resultElement = pokemonDisplay.querySelector('.pokemon-card');
-            const promotedImg = document.createElement('img');
-            promotedImg.src = 'https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/Promoted.JPEG';
-            promotedImg.alt = 'Promoted';
-            promotedImg.style.maxWidth = '100%';
-            promotedImg.style.marginTop = '15px';
-            promotedImg.style.borderRadius = '8px';
-            resultElement.appendChild(promotedImg);
-            
-            completedTasks = Math.max(completedTasks, 3);
-            updateProgress();
-            playSuccessSound();
+                <div class="chart-row">
+                    <div class="chart-label">That guy from the gym</div>
+                    <div class="chart-bar-track">
+                        <div class="chart-bar-fill bar-zero" data-target="2">0 websites</div>
+                    </div>
+                </div>
+                <div class="chart-row">
+                    <div class="chart-label">The dude Tim calls "buddy" at GameStop</div>
+                    <div class="chart-bar-track">
+                        <div class="chart-bar-fill bar-zero" data-target="2">0 websites</div>
+                    </div>
+                </div>
+                <div class="chart-row">
+                    <div class="chart-label">Brittany (Saint, Martyr, Hero)</div>
+                    <div class="chart-bar-track">
+                        <div class="chart-bar-fill bar-brittany" data-target="5">0 websites but she deserves one</div>
+                    </div>
+                </div>
+                <div class="chart-row">
+                    <img src="./josh_monocle.jpeg" alt="Josh" class="josh-profile">
+                    <div class="chart-bar-track" style="overflow:visible;">
+                        <div class="chart-bar-fill bar-josh" data-target="100" style="position:relative;">
+                            1 WHOLE WEBSITE
+                            <div class="sparkles-wrap" id="sparkles-wrap">
+                                <span class="sparkle" style="top:-22px;left:8px;animation-delay:0s;">&#10022;</span>
+                                <span class="sparkle" style="top:-30px;left:28px;animation-delay:0.3s;">&#9733;</span>
+                                <span class="sparkle" style="top:-18px;left:50px;animation-delay:0.15s;">&#10022;</span>
+                                <span class="sparkle" style="top:-28px;left:70px;animation-delay:0.45s;">&#9733;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SECTION 4: POKEMON CARD ===== -->
+<section class="page-section" id="section-4">
+    <div class="container">
+        <div class="section-card gold-border">
+            <h2 class="section-title">Tim's Pokemon Card</h2>
+            <div class="poke-wrap">
+                <div class="poke-img-col">
+                    <img src="./tim_pokemon_card.png" alt="Tim's Pokemon Card">
+                </div>
+                <div class="poke-stats-col">
+                    <h3>TIMOTHEUS</h3>
+                    <div class="poke-hp">HP 420</div>
+                    <div class="poke-stage">Stage 1 -- Evolves from "Chubby Nerd"</div>
+                    <div class="poke-move">
+                        <span class="poke-move-name">Anxiety Attack</span>
+                        <span class="poke-move-dmg">30 DMG</span>
+                        <div class="poke-move-desc">Opponent is paralyzed for 1 turn. User is paralyzed by any birthday party with more than 3 people.</div>
+                    </div>
+                    <div class="poke-move">
+                        <span class="poke-move-name">Ozempic Injection</span>
+                        <span class="poke-move-dmg">100 DMG</span>
+                        <div class="poke-move-desc">User sheds 100 lbs. Opponent becomes confused by the glow-up.</div>
+                    </div>
+                    <div class="poke-move">
+                        <span class="poke-move-name">Commander Deck Shuffle</span>
+                        <span class="poke-move-dmg">50 DMG</span>
+                        <div class="poke-move-desc">User fumbles through 100 cards. Takes 3 turns to find the right one.</div>
+                    </div>
+                    <div class="poke-meta">
+                        <div class="poke-meta-row">
+                            <span>Weakness: Social Gatherings</span>
+                            <span>Resistance: Insults (-30)</span>
+                        </div>
+                        <div class="poke-meta-row"><span>Retreat Cost: 3</span></div>
+                    </div>
+                    <div class="poke-flavor">
+                        "Scientists remain baffled by a creature that can bench press 225 but is scared of his own birthday party."
+                    </div>
+                    <div class="poke-set">028/151 -- March 28</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SECTION 5: YOU GOT THIS TIM ===== -->
+<section class="page-section" id="section-5">
+    <div class="container">
+        <div class="section-card">
+            <h2 class="section-title">You Got This, Tim</h2>
+            <div class="highjump-section">
+                <img src="./high_jump_fail.gif" alt="You got this Tim">
+                <p class="highjump-main">You got this, Tim! (Probably)</p>
+                <p class="highjump-sub">This is how Tim approaches his annual performance review.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SECTION 6: COMPLIMENT GENERATOR ===== -->
+<section class="page-section" id="section-6">
+    <div class="container">
+        <div class="section-card">
+            <h2 class="section-title">Birthday Compliment Generator</h2>
+            <div style="text-align:center;">
+                <button class="btn btn-gold" id="compliment-btn" onclick="generateCompliment()">
+                    Generate a Birthday Compliment
+                </button>
+            </div>
+            <div class="compliment-display hidden" id="compliment-display"></div>
+            <div class="compliment-counter hidden" id="compliment-counter"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SECTION 7: QUIZ ===== -->
+<section class="page-section" id="section-7">
+    <div class="container">
+        <div class="section-card">
+            <h2 class="section-title">How Well Do You Know Tim?</h2>
+            <div id="quiz-body">
+                <div class="quiz-q" id="q1">
+                    <p>Q1: What is Tim's greatest achievement?</p>
+                    <div class="quiz-opts">
+                        <button class="quiz-opt" onclick="pickAnswer(1,'a',this)">A) His career</button>
+                        <button class="quiz-opt" onclick="pickAnswer(1,'b',this)">B) His weight loss</button>
+                        <button class="quiz-opt" onclick="pickAnswer(1,'c',this)">C) His Pokemon collection</button>
+                        <button class="quiz-opt" onclick="pickAnswer(1,'d',this)">D) Being Josh's friend</button>
+                    </div>
+                </div>
+                <div class="quiz-q" id="q2" style="display:none;">
+                    <p>Q2: What does Tim spend most of his money on?</p>
+                    <div class="quiz-opts">
+                        <button class="quiz-opt" onclick="pickAnswer(2,'a',this)">A) Pokemon cards</button>
+                        <button class="quiz-opt" onclick="pickAnswer(2,'b',this)">B) Magic cards</button>
+                        <button class="quiz-opt" onclick="pickAnswer(2,'c',this)">C) Madden DLC</button>
+                        <button class="quiz-opt" onclick="pickAnswer(2,'d',this)">D) All of the above and Brittany is aware</button>
+                    </div>
+                </div>
+                <div class="quiz-q" id="q3" style="display:none;">
+                    <p>Q3: What is Tim's biggest fear?</p>
+                    <div class="quiz-opts">
+                        <button class="quiz-opt" onclick="pickAnswer(3,'a',this)">A) A birthday party with more than 5 people</button>
+                        <button class="quiz-opt" onclick="pickAnswer(3,'b',this)">B) Running out of card sleeves</button>
+                        <button class="quiz-opt" onclick="pickAnswer(3,'c',this)">C) Someone touching his binder</button>
+                        <button class="quiz-opt" onclick="pickAnswer(3,'d',this)">D) Making eye contact at Waffle House</button>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-result" id="quiz-result">
+                <h3>CONGRATULATIONS!</h3>
+                <p style="font-size:1.1em;color:var(--gold);">You scored: <strong>It Doesn't Matter.</strong></p>
+                <p style="color:var(--text-dim);margin-top:10px;">The only thing that matters is that Tim is old now. And Josh made him a website.</p>
+                <img src="./Promoted.JPEG" alt="Promoted" class="section-img">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SECTION 8: WAFFLE HOUSE RSVP ===== -->
+<section class="page-section" id="section-8">
+    <div class="container">
+        <div class="waffle-card">
+            <p class="waffle-header">YOU ARE CORDIALLY INVITED</p>
+            <p style="color:var(--text-dim);font-style:italic;margin-bottom:8px;font-size:0.9em;">to your birthday lunch at the finest establishment known to man:</p>
+            <p class="waffle-venue">WAFFLE HOUSE</p>
+            <p style="color:var(--gold);font-family:'Bangers',cursive;font-size:1.2em;letter-spacing:1px;margin-top:4px;">Since 1955 -- America's Living Room</p>
+            <div class="waffle-details">
+                <p><span class="waffle-label">HOST:</span> Josh (who is sparing NO expense)</p>
+                <p><span class="waffle-label">DRESS CODE:</span> Whatever you wore yesterday is fine</p>
+                <p><span class="waffle-label">BUDGET:</span> Literally unlimited (up to $12)</p>
+                <p><span class="waffle-label">AMBIANCE:</span> Fluorescent lighting. Laminated menus. A radio playing something from 2003. Perfection.</p>
+            </div>
+            <p style="font-family:'Bangers',cursive;font-size:1.7em;color:var(--gold);letter-spacing:2px;">RSVP REQUIRED</p>
+            <div class="rsvp-btns">
+                <button class="btn btn-gold" onclick="rsvpYes()">Yes, I Accept</button>
+                <button class="btn btn-gold" onclick="rsvpYes()">Also Yes</button>
+            </div>
+            <div class="rsvp-response" id="rsvp-response">
+                Great. Josh is buying. Don't order anything expensive. It's Waffle House, so you literally can't.
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SECTION 9: GENUINE CLOSER ===== -->
+<section class="page-section" id="closer">
+    <div class="container">
+        <img src="./tim_and_josh.jpeg" alt="Tim and Josh" class="closer-main">
+        <div class="closer-smalls">
+            <img src="./bachelor_party.jpeg" alt="Bachelor party">
+            <img src="./tim_career.jpeg" alt="Tim career">
+        </div>
+        <div class="closer-text">
+            <p>For real though, Tim. You're one of my favorite humans.</p>
+            <p>You've crushed it this year. 100 lbs down, still killing it at work, being an amazing dad to Finn, and somehow finding time to argue about which Pokemon set to complete next.</p>
+            <p>I'm glad we went from coworkers to whatever this is. The capes, the LAN parties, the Magic cards, the real estate deals. None of it makes sense and all of it matters.</p>
+            <p>Happy birthday, man. Now stop reading this and text me back about Waffle House.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SECTION 10: LOOT BOX (hidden until 3 interactions) ===== -->
+<section class="page-section" id="lootbox">
+    <div class="container" style="text-align:center;">
+        <div class="section-card gold-border">
+            <h2 class="section-title" style="color:var(--gold-light);">Grand Prize Loot Box</h2>
+            <p style="color:var(--text-dim);margin-bottom:4px;">You unlocked it. You earned it. Probably.</p>
+            <div class="loot-visual" id="loot-visual" onclick="openLoot()">&#127873;</div>
+            <p style="font-family:'Press Start 2P',cursive;font-size:0.65em;color:var(--gold);" id="loot-hint">Click to Open</p>
+            <div class="coupon-card" id="coupon-card">
+                <div class="coupon-header">COUPON</div>
+                <img src="./josh_monocle.jpeg" alt="Josh (looking trustworthy)" class="coupon-issuer">
+                <div class="coupon-body">One (1) Free Waffle House Meal</div>
+                <div class="coupon-details"><strong>Redeemable:</strong> Today Only</div>
+                <div class="coupon-details"><strong>Issued by:</strong> Josh (pictured, looking trustworthy)</div>
+                <div class="coupon-details"><strong>Value:</strong> Up to $12 (before tip)</div>
+                <div class="coupon-fine">
+                    Coupon does not cover tip. Coupon does not cover extra hash brown toppings. Coupon issuer reserves the right to suddenly need to use the bathroom when the check arrives. Void where prohibited. Prohibited everywhere except Waffle House.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// ===== PROGRESS =====
+const interactions = new Set();
+function track(id) {
+    interactions.add(id);
+    const n = interactions.size;
+    document.getElementById('prog-count').textContent = Math.min(n, 6);
+    document.getElementById('prog-fill').style.width = Math.min(n / 6 * 100, 100) + '%';
+    if (n >= 3) {
+        document.getElementById('unlock-hint').style.display = 'block';
+        revealLoot();
+    }
+}
+
+function revealLoot() {
+    const el = document.getElementById('lootbox');
+    if (el.style.display !== 'flex') {
+        el.style.display = 'flex';
+        el.style.flexDirection = 'column';
+        el.style.justifyContent = 'center';
+        el.classList.add('fade-in');
+        setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 1000);
+    }
+}
+
+// ===== CONFETTI =====
+function pop(opts) {
+    confetti({
+        particleCount: opts.count || 80, spread: opts.spread || 70,
+        origin: opts.origin || { y: 0.6 },
+        colors: opts.colors || ['#d4af37','#ffd700','#cc0000','#ff6b35','#ffffff'],
+        ...opts
+    });
+}
+function bigPop() {
+    const end = Date.now() + 3000;
+    const f = () => {
+        confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#d4af37','#ffd700','#cc0000'] });
+        confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#d4af37','#ff6b35','#ffffff'] });
+        if (Date.now() < end) requestAnimationFrame(f);
+    };
+    f();
+}
+
+// ===== HERO LOAD CONFETTI =====
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        pop({ count: 160, spread: 100, origin: { y: 0.4 } });
+        setTimeout(() => pop({ count: 100, spread: 80, origin: { y: 0.5, x: 0.25 } }), 350);
+        setTimeout(() => pop({ count: 100, spread: 80, origin: { y: 0.5, x: 0.75 } }), 700);
+    }, 600);
+});
+
+// ===== SECTION 2: SCAN =====
+let scanDone = false;
+function startScan() {
+    if (scanDone) return;
+    scanDone = true;
+    const btn = document.getElementById('scan-btn');
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    document.getElementById('scanner-box').style.display = 'block';
+
+    const steps = [
+        'Analyzing browser history...',
+        'Cross-referencing Pokemon card collection...',
+        'Checking Ozempic prescription records...',
+        'Consulting Brittany...',
+        'Analyzing Madden play history...',
+        'Compiling results...'
+    ];
+    let i = 0;
+    const iv = setInterval(() => {
+        if (i < steps.length) {
+            document.getElementById('scan-text').textContent = steps[i];
+            document.getElementById('scan-fill').style.width = ((i + 1) / steps.length * 100) + '%';
+            i++;
+        } else {
+            clearInterval(iv);
+            setTimeout(() => {
+                document.getElementById('scanner-box').style.display = 'none';
+                const res = document.getElementById('scan-result');
+                res.style.display = 'block';
+                pop({ count: 130, spread: 90, origin: { y: 0.5 } });
+                track('scan');
+            }, 500);
         }
+    }, 680);
+}
 
-        // Sound Effects
-        function playSuccessSound() {
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
+// ===== SECTION 3: CHART =====
+let chartDone = false;
+new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !chartDone) {
+        chartDone = true;
+        const bars = document.querySelectorAll('.chart-bar-fill');
+        bars.forEach((bar, i) => {
+            setTimeout(() => {
+                bar.style.width = bar.dataset.target + '%';
+                if (bar.classList.contains('bar-josh')) {
+                    setTimeout(() => { document.getElementById('sparkles-wrap').style.display = 'block'; }, 1600);
+                }
+            }, i * 220);
+        });
+        track('chart');
+    }
+}, { threshold: 0.35 }).observe(document.getElementById('section-3'));
 
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
+// ===== SECTION 4: POKEMON VIEW =====
+let pokeDone = false;
+new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !pokeDone) {
+        pokeDone = true;
+        track('pokemon');
+    }
+}, { threshold: 0.3 }).observe(document.getElementById('section-4'));
 
-            oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-            oscillator.frequency.linearRampToValueAtTime(1200, audioContext.currentTime + 0.1);
+// ===== SECTION 6: COMPLIMENTS =====
+const compliments = [
+    "Tim, you have an incredibly sculpted and impressively large penis. Scientists have tried to study it but keep getting intimidated.",
+    "You're the only person I know who lost 100 lbs and somehow got MORE annoying.",
+    "Your Pokemon card collection is worth more than your house and honestly that's kind of inspiring.",
+    "You're like if Deadpool had anxiety and a Costco membership.",
+    "Finn is going to grow up and realize his dad is the coolest nerd alive. Or he's going to be deeply embarrassed. Either way, you're memorable.",
+    "You make support engineering look like a contact sport and I respect that.",
+    "The fact that you willingly wore an Etsy cloak to watch Lord of the Rings tells me everything I need to know about your character. All good things.",
+    "You're proof that you can lose 100 lbs and still be a heavyweight in the friendship department.",
+    "Brittany is a saint for putting up with your card collection. Just want that on record.",
+    "Your commander deck is almost as impressive as your ability to pretend you know what you're doing at work.",
+    "You once served your country. Now you serve Jira tickets. The downgrade is inspiring.",
+    "Happy birthday to the only man who can make 'Director of Technical Support' sound like a WWE title."
+];
+const roasts = [
+    "You've been alive this long and the best flex you have is a binder full of laminated cardboard.",
+    "Tim once took 45 minutes to pick a Commander deck for a casual game. The casual game was just us. Waiting. In silence.",
+    "You have an opinion about which Waffle House location has the best hash browns and I think that's beautiful and horrifying.",
+    "Your Madden franchise mode has a longer lore than most published novels.",
+    "Finn is going to find your card collection someday and either inherit a fortune or be deeply confused. Either way, therapy.",
+    "You rate restaurants based on whether they have TVs showing sports. You are 34 going on 64.",
+    "The amount of card sleeves you own is a cry for help I have chosen to honor.",
+    "You're the kind of guy who researches restaurants for 30 minutes and then orders the burger anyway."
+];
 
-            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-
-            oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + 0.1);
+let cIdx = 0;
+let cTracked = false;
+function generateCompliment() {
+    if (!cTracked) { cTracked = true; track('compliment'); }
+    const disp = document.getElementById('compliment-display');
+    const ctr = document.getElementById('compliment-counter');
+    const btn = document.getElementById('compliment-btn');
+    disp.classList.remove('hidden');
+    ctr.classList.remove('hidden');
+    disp.style.opacity = '0';
+    setTimeout(() => {
+        if (cIdx < compliments.length) {
+            disp.textContent = '"' + compliments[cIdx] + '"';
+            disp.style.borderColor = 'var(--gold)';
+            ctr.textContent = (cIdx + 1) + ' / ' + compliments.length + ' compliments';
+            cIdx++;
+            if (cIdx >= compliments.length) btn.textContent = "OK that's all the nice ones";
+        } else {
+            const r = roasts[(cIdx - compliments.length) % roasts.length];
+            disp.textContent = '"' + r + '"';
+            disp.style.borderColor = 'var(--red)';
+            ctr.textContent = 'ROAST MODE';
+            cIdx++;
         }
+        disp.style.opacity = '1';
+        pop({ count: 35, spread: 50, origin: { y: 0.65 } });
+    }, 180);
+}
 
-        function playBuzzerSound() {
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-
-            oscillator.frequency.setValueAtTime(150, audioContext.currentTime);
-            oscillator.frequency.linearRampToValueAtTime(100, audioContext.currentTime + 0.3);
-
-            gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-
-            oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + 0.3);
+// ===== SECTION 7: QUIZ =====
+let quizTracked = false;
+function pickAnswer(q, ans, btn) {
+    const qEl = document.getElementById('q' + q);
+    qEl.querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    setTimeout(() => {
+        if (q < 3) {
+            qEl.style.opacity = '0.5';
+            const next = document.getElementById('q' + (q + 1));
+            next.style.display = 'block';
+            next.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+            document.getElementById('quiz-body').style.display = 'none';
+            document.getElementById('quiz-result').style.display = 'block';
+            pop({ count: 110, spread: 85, origin: { y: 0.55 } });
+            if (!quizTracked) { quizTracked = true; track('quiz'); }
         }
+    }, 550);
+}
 
-        updateProgress();
-    </script>
+// ===== SECTION 8: RSVP =====
+let rsvpDone = false;
+function rsvpYes() {
+    if (rsvpDone) return;
+    rsvpDone = true;
+    document.getElementById('rsvp-response').style.display = 'block';
+    bigPop();
+    track('rsvp');
+}
+
+// ===== SECTION 10: LOOT BOX =====
+let lootDone = false;
+function openLoot() {
+    if (lootDone) return;
+    lootDone = true;
+    const box = document.getElementById('loot-visual');
+    box.style.animation = 'loot-shake 0.5s ease';
+    setTimeout(() => {
+        box.style.transform = 'scale(0)';
+        box.style.opacity = '0';
+        document.getElementById('loot-hint').style.display = 'none';
+        bigPop();
+        setTimeout(() => {
+            const coupon = document.getElementById('coupon-card');
+            coupon.style.display = 'block';
+            pop({ count: 200, spread: 130, origin: { y: 0.5 }, colors: ['#d4af37','#ffd700','#ffffff','#cc0000'] });
+        }, 400);
+    }, 500);
+}
+</script>
 </body>
 </html>
