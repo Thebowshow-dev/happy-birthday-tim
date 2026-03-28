@@ -1,1245 +1,1171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Tim | A Website You Don't Deserve</title>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;700;900&family=Press+Start+2P&display=swap');
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-:root {
-  --red: #e23636;
-  --dark-red: #a81c1c;
-  --black: #0a0a0a;
-  --dark: #111111;
-  --darker: #1a1a1a;
-  --card-bg: #1e1e1e;
-  --text: #f0f0f0;
-  --muted: #888;
-  --gold: #ffd700;
-  --pokemon-yellow: #ffcb05;
-  --pokemon-blue: #3d7dca;
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--black);
-  color: var(--text);
-  font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
-  line-height: 1.6;
-}
-
-section {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  position: relative;
-}
-
-.section-inner {
-  max-width: 800px;
-  width: 100%;
-  text-align: center;
-}
-
-h2 {
-  font-family: 'Bangers', cursive;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  color: var(--red);
-  margin-bottom: 30px;
-  letter-spacing: 2px;
-}
-
-/* =================== HERO =================== */
-#hero {
-  background: radial-gradient(ellipse at center, #1a0000 0%, var(--black) 70%);
-  position: relative;
-  overflow: hidden;
-}
-
-#hero::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: conic-gradient(from 0deg, transparent 0%, rgba(226,54,54,0.03) 25%, transparent 50%);
-  animation: heroSpin 20s linear infinite;
-}
-
-@keyframes heroSpin { to { transform: rotate(360deg); } }
-
-.hero-pre {
-  font-family: 'Press Start 2P', monospace;
-  font-size: clamp(0.6rem, 2vw, 0.9rem);
-  color: var(--muted);
-  margin-bottom: 20px;
-  animation: fadeInDown 1s ease-out;
-  position: relative;
-}
-
-.hero-title {
-  font-family: 'Bangers', cursive;
-  font-size: clamp(3.5rem, 12vw, 8rem);
-  color: var(--red);
-  text-shadow: 4px 4px 0 #000, 0 0 40px rgba(226,54,54,0.5);
-  line-height: 1;
-  margin-bottom: 10px;
-  animation: heroSlam 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  position: relative;
-}
-
-.hero-name {
-  font-family: 'Bangers', cursive;
-  font-size: clamp(4rem, 15vw, 10rem);
-  background: linear-gradient(135deg, var(--gold) 0%, #fff 50%, var(--gold) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: none;
-  filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.8));
-  line-height: 1;
-  margin-bottom: 30px;
-  animation: heroSlam 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.2s both;
-  position: relative;
-}
-
-.hero-sub {
-  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-  color: var(--muted);
-  max-width: 500px;
-  margin: 0 auto 20px;
-  animation: fadeIn 1s ease-out 0.6s both;
-  position: relative;
-}
-
-.hero-deadpool {
-  font-size: clamp(0.75rem, 2vw, 0.95rem);
-  color: var(--red);
-  font-style: italic;
-  opacity: 0.7;
-  animation: fadeIn 1s ease-out 1s both;
-  position: relative;
-}
-
-.hero-deadpool::before { content: '[ '; }
-.hero-deadpool::after { content: ' ]'; }
-
-.scroll-arrow {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: bounce 2s infinite;
-  font-size: 2rem;
-  color: var(--red);
-  cursor: pointer;
-  text-decoration: none;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(10px); }
-}
-
-@keyframes heroSlam {
-  0% { transform: scale(3) rotate(-5deg); opacity: 0; }
-  100% { transform: scale(1) rotate(0); opacity: 1; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.visible { animation: fadeInUp 0.8s ease-out forwards; }
-.hidden-on-load { opacity: 0; }
-
-/* =================== GAY BUTTON =================== */
-#gay-section { background: var(--dark); }
-
-.gay-btn {
-  font-family: 'Bangers', cursive;
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  padding: 25px 50px;
-  background: linear-gradient(135deg, var(--red), #ff4444);
-  color: white;
-  border: 4px solid var(--gold);
-  border-radius: 15px;
-  cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 0 30px rgba(226,54,54,0.3);
-  letter-spacing: 2px;
-  position: relative;
-  overflow: hidden;
-}
-
-.gay-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 50px rgba(226,54,54,0.5);
-}
-
-.gay-btn::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
-  animation: shimmer 3s infinite;
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%) rotate(45deg); }
-  100% { transform: translateX(100%) rotate(45deg); }
-}
-
-.scan-container {
-  display: none;
-  width: 100%;
-  max-width: 500px;
-  margin-top: 30px;
-}
-
-.scan-bar-outer {
-  width: 100%;
-  height: 30px;
-  background: var(--darker);
-  border-radius: 15px;
-  overflow: hidden;
-  border: 2px solid var(--red);
-  margin-bottom: 15px;
-}
-
-.scan-bar-inner {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, var(--red), var(--gold));
-  border-radius: 13px;
-  transition: width 0.3s ease;
-}
-
-.scan-text {
-  font-family: 'Press Start 2P', monospace;
-  font-size: clamp(0.55rem, 1.5vw, 0.75rem);
-  color: var(--gold);
-  min-height: 20px;
-}
-
-.scan-result {
-  display: none;
-  margin-top: 30px;
-}
-
-.scan-result h3 {
-  font-family: 'Bangers', cursive;
-  font-size: clamp(2rem, 6vw, 4rem);
-  background: linear-gradient(135deg, #ff0000, #ff6b6b, #ffaa00, #00ff00, #0066ff, #8b00ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: rainbow 2s linear infinite;
-  background-size: 300% 300%;
-}
-
-@keyframes rainbow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.scan-result p {
-  color: var(--muted);
-  margin-top: 10px;
-  font-style: italic;
-}
-
-/* =================== FRIENDSHIP CHART =================== */
-#chart-section { background: var(--black); }
-
-.chart-container {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.chart-bar-row {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  gap: 15px;
-}
-
-.chart-label {
-  width: 180px;
-  text-align: right;
-  font-size: clamp(0.7rem, 2vw, 0.9rem);
-  color: var(--muted);
-  flex-shrink: 0;
-}
-
-.chart-bar-wrapper {
-  flex: 1;
-  height: 40px;
-  background: var(--darker);
-  border-radius: 8px;
-  overflow: visible;
-  position: relative;
-}
-
-.chart-bar {
-  height: 100%;
-  border-radius: 8px;
-  width: 0%;
-  transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 10px;
-  font-weight: 900;
-  font-size: 0.8rem;
-}
-
-.chart-bar.zero {
-  width: 100% !important;
-  background: transparent;
-  justify-content: flex-start;
-  padding-left: 10px;
-  color: var(--muted);
-}
-
-.chart-bar.josh {
-  background: linear-gradient(90deg, var(--red), var(--gold));
-  color: var(--black);
-  position: relative;
-}
-
-.chart-bar.josh.animated { width: 150% !important; }
-
-.chart-subtitle {
-  font-size: 0.85rem;
-  color: var(--muted);
-  margin-top: 20px;
-  font-style: italic;
-}
-
-/* =================== POKEMON CARD =================== */
-#pokemon-section {
-  background: var(--dark);
-  padding: 80px 20px;
-}
-
-.pokemon-card {
-  width: 350px;
-  max-width: 95vw;
-  background: linear-gradient(135deg, #c9a227, #f5e17d, #c9a227);
-  border-radius: 18px;
-  padding: 12px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(201,162,39,0.3);
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.3s;
-  margin: 0 auto;
-}
-
-.pokemon-card:hover { transform: rotateY(5deg) rotateX(2deg); }
-
-.pokemon-card-inner {
-  background: linear-gradient(180deg, #e8d5a3 0%, #f0e6c8 30%, #e8d5a3 100%);
-  border-radius: 12px;
-  padding: 15px;
-  border: 3px solid #b8941f;
-}
-
-.poke-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.poke-stage {
-  font-size: 0.65rem;
-  color: #555;
-  font-weight: 600;
-}
-
-.poke-name {
-  font-family: 'Bangers', cursive;
-  font-size: 1.5rem;
-  color: #222;
-  letter-spacing: 2px;
-}
-
-.poke-hp {
-  color: var(--red);
-  font-weight: 900;
-  font-size: 1.1rem;
-}
-
-.poke-hp span {
-  font-size: 0.7rem;
-  color: #555;
-}
-
-.poke-type-badge {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #8b5cf6, #a78bfa);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7rem;
-  margin-left: 5px;
-}
-
-.poke-image-frame {
-  background: linear-gradient(180deg, #a8c8f0, #d4e4f7);
-  border: 3px solid #b8941f;
-  border-radius: 8px;
-  height: 180px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 5rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.poke-image-frame::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.2) 50%, transparent 60%);
-}
-
-.poke-image-text {
-  font-size: 4rem;
-  line-height: 1;
-  text-align: center;
-}
-
-.poke-moves {
-  border: 2px solid #b8941f;
-  border-radius: 8px;
-  background: rgba(255,255,255,0.3);
-  padding: 10px;
-  margin-bottom: 8px;
-}
-
-.poke-move {
-  display: flex;
-  align-items: flex-start;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-  text-align: left;
-}
-
-.poke-move:last-child { border-bottom: none; }
-
-.poke-move-energy {
-  width: 35px;
-  flex-shrink: 0;
-  display: flex;
-  gap: 2px;
-  padding-top: 2px;
-}
-
-.energy-dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 1px solid #333;
-}
-
-.energy-psychic { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
-.energy-normal { background: linear-gradient(135deg, #a8a878, #c6c6a7); }
-.energy-colorless { background: linear-gradient(135deg, #ccc, #eee); }
-
-.poke-move-info { flex: 1; }
-
-.poke-move-name {
-  font-weight: 900;
-  font-size: 0.85rem;
-  color: #222;
-}
-
-.poke-move-desc {
-  font-size: 0.65rem;
-  color: #555;
-  font-style: italic;
-  line-height: 1.3;
-  margin-top: 2px;
-}
-
-.poke-move-damage {
-  font-weight: 900;
-  font-size: 1.2rem;
-  color: #222;
-  width: 40px;
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.poke-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.65rem;
-  color: #555;
-  margin-bottom: 8px;
-  padding: 0 5px;
-}
-
-.poke-footer-item { display: flex; align-items: center; gap: 4px; }
-.poke-footer-label { font-weight: 600; }
-
-.poke-flavor {
-  font-size: 0.6rem;
-  color: #555;
-  font-style: italic;
-  text-align: center;
-  padding: 5px;
-  line-height: 1.4;
-}
-
-.poke-set {
-  text-align: right;
-  font-size: 0.6rem;
-  color: #777;
-  margin-top: 4px;
-}
-
-/* =================== COMPLIMENT GENERATOR =================== */
-#compliment-section { background: var(--black); }
-
-.compliment-display {
-  min-height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 30px;
-  margin: 30px 0;
-  background: var(--darker);
-  border: 2px solid var(--red);
-  border-radius: 15px;
-  font-size: clamp(1rem, 2.5vw, 1.3rem);
-  font-style: italic;
-  color: var(--gold);
-  transition: all 0.3s;
-}
-
-.compliment-btn {
-  font-family: 'Bangers', cursive;
-  font-size: 1.5rem;
-  padding: 15px 40px;
-  background: var(--red);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s;
-  letter-spacing: 1px;
-}
-
-.compliment-btn:hover {
-  background: var(--dark-red);
-  transform: scale(1.05);
-}
-
-.compliment-counter {
-  font-size: 0.8rem;
-  color: var(--muted);
-  margin-top: 15px;
-}
-
-/* =================== QUIZ =================== */
-#quiz-section { background: var(--dark); }
-
-.quiz-card {
-  background: var(--card-bg);
-  border-radius: 15px;
-  padding: 30px;
-  margin-bottom: 25px;
-  border: 1px solid #333;
-  text-align: left;
-}
-
-.quiz-question {
-  font-weight: 700;
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-  margin-bottom: 15px;
-  color: var(--gold);
-}
-
-.quiz-option {
-  display: block;
-  width: 100%;
-  padding: 12px 18px;
-  margin-bottom: 8px;
-  background: var(--darker);
-  border: 2px solid #333;
-  border-radius: 8px;
-  color: var(--text);
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-align: left;
-}
-
-.quiz-option:hover {
-  border-color: var(--red);
-  background: rgba(226,54,54,0.1);
-}
-
-.quiz-option.selected {
-  border-color: var(--gold);
-  background: rgba(255,215,0,0.1);
-}
-
-.quiz-submit {
-  font-family: 'Bangers', cursive;
-  font-size: 1.3rem;
-  padding: 12px 35px;
-  background: var(--red);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-top: 15px;
-  transition: all 0.3s;
-  letter-spacing: 1px;
-}
-
-.quiz-submit:hover { background: var(--dark-red); transform: scale(1.05); }
-
-.quiz-result {
-  display: none;
-  background: var(--card-bg);
-  border: 2px solid var(--gold);
-  border-radius: 15px;
-  padding: 30px;
-  margin-top: 20px;
-}
-
-.quiz-result h3 {
-  font-family: 'Bangers', cursive;
-  font-size: 2rem;
-  color: var(--gold);
-  margin-bottom: 10px;
-}
-
-/* =================== RSVP =================== */
-#rsvp-section {
-  background: var(--black);
-  background-image: radial-gradient(ellipse at 50% 50%, rgba(226,54,54,0.05) 0%, transparent 70%);
-}
-
-.rsvp-card {
-  background: var(--card-bg);
-  border: 3px solid var(--gold);
-  border-radius: 20px;
-  padding: 40px 30px;
-  max-width: 550px;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-}
-
-.rsvp-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--gold), var(--red), var(--gold));
-}
-
-.rsvp-ornament {
-  font-size: 0.8rem;
-  color: var(--gold);
-  letter-spacing: 8px;
-  margin-bottom: 15px;
-}
-
-.rsvp-title {
-  font-family: 'Bangers', cursive;
-  font-size: clamp(1.3rem, 3.5vw, 2rem);
-  color: var(--gold);
-  margin-bottom: 5px;
-}
-
-.rsvp-subtitle {
-  font-size: 0.85rem;
-  color: var(--muted);
-  font-style: italic;
-  margin-bottom: 20px;
-}
-
-.rsvp-body {
-  font-size: clamp(0.9rem, 2.5vw, 1.05rem);
-  line-height: 1.8;
-  margin-bottom: 25px;
-  color: var(--text);
-}
-
-.rsvp-body strong { color: var(--gold); }
-
-.rsvp-buttons {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.rsvp-btn {
-  font-family: 'Bangers', cursive;
-  font-size: 1.2rem;
-  padding: 12px 30px;
-  border: 2px solid var(--gold);
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s;
-  letter-spacing: 1px;
-}
-
-.rsvp-btn.yes {
-  background: var(--red);
-  color: white;
-}
-
-.rsvp-btn.also-yes {
-  background: transparent;
-  color: var(--gold);
-}
-
-.rsvp-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255,215,0,0.3); }
-
-.rsvp-response {
-  display: none;
-  margin-top: 20px;
-  font-size: 1.1rem;
-  color: var(--gold);
-  line-height: 1.6;
-}
-
-.rsvp-date {
-  font-weight: 700;
-  color: var(--gold);
-  font-size: 1.1rem;
-  margin: 10px 0;
-}
-
-/* =================== CLOSER =================== */
-#closer-section {
-  background: linear-gradient(180deg, var(--dark) 0%, var(--black) 100%);
-  min-height: 60vh;
-}
-
-.closer-text {
-  max-width: 600px;
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-  line-height: 2;
-  color: var(--text);
-  opacity: 0.9;
-}
-
-.closer-text p { margin-bottom: 20px; }
-
-.closer-sign {
-  font-family: 'Bangers', cursive;
-  font-size: 1.5rem;
-  color: var(--red);
-  margin-top: 20px;
-}
-
-.closer-year {
-  font-size: 0.8rem;
-  color: var(--muted);
-  margin-top: 40px;
-}
-
-/* =================== FOURTH WALL BREAK =================== */
-.fourth-wall {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: var(--red);
-  color: white;
-  padding: 12px 18px;
-  border-radius: 10px;
-  font-size: 0.8rem;
-  max-width: 280px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-  z-index: 100;
-  cursor: pointer;
-  transition: all 0.3s;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.fourth-wall.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.fourth-wall:hover { background: var(--dark-red); }
-
-/* =================== RESPONSIVENESS =================== */
-@media (max-width: 600px) {
-  section { padding: 40px 15px; }
-  .pokemon-card { width: 300px; }
-  .chart-label { width: 120px; font-size: 0.65rem; }
-  .rsvp-card { padding: 25px 20px; }
-  .gay-btn { padding: 20px 30px; }
-  .quiz-card { padding: 20px; }
-  .poke-image-frame { height: 140px; }
-  .poke-image-text { font-size: 3rem; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Tim!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b1b 100%);
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .progress-tracker {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(20, 20, 20, 0.9);
+            border: 2px solid #d4af37;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            color: #d4af37;
+            z-index: 1000;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .progress-bar {
+            width: 100px;
+            height: 6px;
+            background: #333;
+            border: 1px solid #d4af37;
+            border-radius: 3px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #d4af37, #ff6b35);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(180deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0) 100%);
+            border-bottom: 2px solid #d4af37;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            color: #ff6b35;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 107, 53, 0.5);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .hero-subtext {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: #d4af37;
+            margin-bottom: 20px;
+        }
+
+        .completion-notice {
+            background: rgba(212, 175, 55, 0.15);
+            border: 2px solid #d4af37;
+            border-radius: 8px;
+            padding: 16px 24px;
+            margin-top: 20px;
+            font-size: 0.95rem;
+            color: #ffd700;
+            font-weight: 700;
+            box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.1), 0 0 20px rgba(212, 175, 55, 0.2);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.1), 0 0 20px rgba(212, 175, 55, 0.2); }
+            50% { box-shadow: inset 0 0 30px rgba(212, 175, 55, 0.2), 0 0 30px rgba(212, 175, 55, 0.4); }
+        }
+
+        section {
+            max-width: 800px;
+            margin: 40px auto;
+            background: rgba(30, 30, 30, 0.8);
+            border: 2px solid #ff6b35;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        section h2 {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: #d4af37;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            margin: 15px 0;
+        }
+
+        .image-caption {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            font-style: italic;
+            text-align: center;
+            margin-top: -10px;
+            margin-bottom: 15px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-family: 'Bangers', cursive;
+            border: 2px solid #d4af37;
+            background: linear-gradient(135deg, #2d1b1b 0%, #1a1a1a 100%);
+            color: #d4af37;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #ff6b35 0%, #d4af37 100%);
+            color: #1a1a1a;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .gay-scanner {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .scan-result {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.9rem;
+            color: #ff6b35;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid #ff6b35;
+            border-radius: 8px;
+            animation: scan-flash 0.5s ease;
+        }
+
+        @keyframes scan-flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .friendship-chart {
+            margin: 20px 0;
+        }
+
+        .chart-row {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            gap: 15px;
+        }
+
+        .chart-label {
+            min-width: 150px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #d4af37;
+        }
+
+        .chart-bar {
+            flex: 1;
+            height: 30px;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid #d4af37;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b35, #d4af37);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            width: 0%;
+            transition: width 2s ease-out;
+        }
+
+        .chart-value {
+            min-width: 80px;
+            text-align: right;
+            font-size: 0.9rem;
+            color: #b0b0b0;
+        }
+
+        /* Pokemon card is now an image - no CSS needed */
+
+        .motivation-section {
+            text-align: center;
+        }
+
+        .motivation-image {
+            border-radius: 12px;
+            max-width: 100%;
+            margin: 20px 0;
+        }
+
+        .motivation-text {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        .compliment-box {
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px solid #d4af37;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .compliment-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #ffd700;
+            font-weight: 700;
+        }
+
+        .insult-box {
+            background: rgba(128, 0, 128, 0.1);
+            border: 2px solid #9d4edd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .insult-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #ff6b35;
+            font-weight: 700;
+        }
+
+        .compliment-counter {
+            font-size: 0.85rem;
+            color: #b0b0b0;
+            margin-top: 15px;
+        }
+
+        .quiz-section {
+            margin: 30px 0;
+        }
+
+        .quiz-question {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid #ff6b35;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .quiz-question p {
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            padding: 10px 15px;
+            background: rgba(30, 30, 30, 0.8);
+            border: 2px solid #b0b0b0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .quiz-option:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+        }
+
+        .quiz-option input {
+            margin-right: 10px;
+        }
+
+        .quiz-result {
+            background: rgba(255, 107, 53, 0.15);
+            border: 2px solid #ff6b35;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            color: #ff6b35;
+        }
+
+        .rsvp-section {
+            text-align: center;
+        }
+
+        .fancy-text {
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            color: #d4af37;
+            margin: 20px 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .coupon-teaser {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(255, 107, 53, 0.1) 100%);
+            border: 2px dashed #d4af37;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 1rem;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+
+        .closing-section {
+            text-align: center;
+        }
+
+        .closing-image {
+            border-radius: 12px;
+            max-width: 100%;
+            margin: 20px 0;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .closing-text {
+            font-size: 1.05rem;
+            color: #e0e0e0;
+            margin: 20px 0;
+            line-height: 1.8;
+        }
+
+        .loot-box-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .loot-box {
+            width: 200px;
+            height: 200px;
+            margin: 30px auto;
+            background: linear-gradient(135deg, #d4af37 0%, #ffd700 50%, #d4af37 100%);
+            border: 5px solid #8b7500;
+            border-radius: 8px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bangers', cursive;
+            font-size: 3rem;
+        }
+
+        .loot-box.locked {
+            background: linear-gradient(135deg, #666 0%, #999 50%, #666 100%);
+            border-color: #333;
+            color: #333;
+            cursor: not-allowed;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+        }
+
+        .loot-box.locked::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='65' text-anchor='middle' font-size='50' fill='%23333'%3E%F0%9F%94%92%3C/text%3E%3C/svg%3E") center/60px no-repeat;
+            pointer-events: none;
+        }
+
+        .loot-box.unlocked {
+            cursor: pointer;
+            animation: unlock-glow 0.6s ease;
+        }
+
+        @keyframes unlock-glow {
+            0% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.8); }
+            100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+        }
+
+        .loot-box.unlocked:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            10% { transform: translate(-5px, -5px) rotate(-1deg); }
+            20% { transform: translate(5px, 5px) rotate(1deg); }
+            30% { transform: translate(-5px, 5px) rotate(-1deg); }
+            40% { transform: translate(5px, -5px) rotate(1deg); }
+            50% { transform: translate(-5px, -5px) rotate(-1deg); }
+            60% { transform: translate(5px, 5px) rotate(1deg); }
+            70% { transform: translate(-5px, 5px) rotate(-1deg); }
+            80% { transform: translate(5px, -5px) rotate(1deg); }
+            90% { transform: translate(-5px, -5px) rotate(-1deg); }
+        }
+
+        .loot-box.shaking {
+            animation: shake 2s ease !important;
+        }
+
+        @keyframes golden-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.2); }
+            50% { box-shadow: 0 0 50px rgba(212, 175, 55, 1), inset 0 0 30px rgba(255, 255, 255, 0.4); }
+        }
+
+        .loot-box.glowing {
+            animation: golden-glow 2s ease !important;
+        }
+
+        .coupon-card {
+            background: linear-gradient(135deg, #ffe4a0 0%, #ffd700 100%);
+            border: 5px solid #8b7500;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 500px;
+            margin: 30px auto;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+            color: #1a1a1a;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            animation: coupon-slide 0.8s ease;
+            opacity: 0;
+        }
+
+        .coupon-card.revealed {
+            opacity: 1;
+        }
+
+        @keyframes coupon-slide {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .coupon-issuer {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #8b7500;
+            margin: 0 auto 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .coupon-title {
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            color: #d4af37;
+            margin: 20px 0;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .coupon-detail {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #333;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .coupon-fine-print {
+            font-size: 7px;
+            color: #666;
+            text-align: left;
+            line-height: 1.3;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #8b7500;
+        }
+
+        .coupon-fine-print p {
+            margin: 3px 0;
+        }
+
+        .fourth-wall {
+            background: rgba(128, 0, 128, 0.1);
+            border-left: 4px solid #9d4edd;
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-size: 0.95rem;
+            color: #e0e0e0;
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            section {
+                margin: 20px 10px;
+                padding: 20px;
+            }
+
+            .progress-tracker {
+                top: 10px;
+                right: 10px;
+                font-size: 8px;
+                padding: 8px 12px;
+            }
+
+            .chart-label {
+                min-width: 120px;
+                font-size: 0.9rem;
+            }
+
+            .button-group {
+                gap: 10px;
+            }
+
+            button {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+
+            .loot-box {
+                width: 150px;
+                height: 150px;
+                font-size: 2rem;
+            }
+
+            .coupon-card {
+                padding: 20px;
+                margin: 20px 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<!-- ============ HERO ============ -->
-<section id="hero">
-  <div class="section-inner">
-    <div class="hero-pre">* a website nobody asked for *</div>
-    <div class="hero-title">HAPPY BIRTHDAY</div>
-    <div class="hero-name">TIM</div>
-    <div class="hero-sub">Yes, someone made you a whole website. No, you don't deserve it. But here we are.</div>
-    <div class="hero-deadpool">The audience is already scrolling. Classic move, just like Tim skipping the tutorial in every video game.</div>
-  </div>
-  <a href="#gay-section" class="scroll-arrow">&#x25BC;</a>
-</section>
-
-<!-- ============ GAY BUTTON ============ -->
-<section id="gay-section">
-  <div class="section-inner">
-    <h2>A Very Important Scientific Test</h2>
-    <p style="color: var(--muted); margin-bottom: 30px; font-size: 0.95rem;">Decades of research have led to this breakthrough diagnostic tool.</p>
-    <button class="gay-btn" id="gayBtn" onclick="startScan()">
-      &#x1F50E; CLICK HERE TO FIND OUT IF YOU'RE GAY
-    </button>
-    <div class="scan-container" id="scanContainer">
-      <div class="scan-bar-outer">
-        <div class="scan-bar-inner" id="scanBar"></div>
-      </div>
-      <div class="scan-text" id="scanText"></div>
+    <div class="progress-tracker">
+        <div>PROGRESS</div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div id="progressText" style="text-align: center; margin-top: 8px; font-size: 11px;">0/5</div>
     </div>
-    <div class="scan-result" id="scanResult">
-      <h3>Results: Yes. Obviously.</h3>
-      <p>"We didn't even need the scan. We all knew." - Science</p>
-    </div>
-  </div>
-</section>
 
-<!-- ============ FRIENDSHIP CHART ============ -->
-<section id="chart-section">
-  <div class="section-inner">
-    <h2>Which of Tim's "Friends" Made Him an Entire Website</h2>
-    <p style="color: var(--muted); margin-bottom: 40px;">A comprehensive data-driven analysis. Peer-reviewed by nobody.</p>
-    <div class="chart-container" id="chartContainer">
-      <div class="chart-bar-row">
-        <div class="chart-label">Chad from nCino</div>
-        <div class="chart-bar-wrapper">
-          <div class="chart-bar zero">0 websites</div>
+    <header>
+        <h1>Happy Birthday Tim!</h1>
+        <p class="hero-subtext">You're 47. And still fabulous.</p>
+        <div class="completion-notice">
+            IMPORTANT: Complete every section on this page to unlock your birthday present at the bottom. Yes, there's actually a present. No, you can't skip ahead.
         </div>
-      </div>
-      <div class="chart-bar-row">
-        <div class="chart-label">That guy from the gym</div>
-        <div class="chart-bar-wrapper">
-          <div class="chart-bar zero">0 websites</div>
-        </div>
-      </div>
-      <div class="chart-bar-row">
-        <div class="chart-label">Finn (his own son)</div>
-        <div class="chart-bar-wrapper">
-          <div class="chart-bar zero">0 websites (and he's 7, so no excuse)</div>
-        </div>
-      </div>
-      <div class="chart-bar-row">
-        <div class="chart-label">His Pokemon cards</div>
-        <div class="chart-bar-wrapper">
-          <div class="chart-bar zero">0 websites (they don't even text back)</div>
-        </div>
-      </div>
-      <div class="chart-bar-row">
-        <div class="chart-label" style="color: var(--gold); font-weight:900;">JOSH</div>
-        <div class="chart-bar-wrapper">
-          <div class="chart-bar josh" id="joshBar">1 WHOLE WEBSITE &#x1F451;</div>
-        </div>
-      </div>
-    </div>
-    <p class="chart-subtitle">The data doesn't lie, Tim. I am the main character of your life. Accept it.</p>
-    <p style="color: var(--muted); font-size: 0.75rem; margin-top: 8px;">Also, I taught you Magic the Gathering AND bought you a commander deck. The bar should be even taller.</p>
-  </div>
-</section>
+    </header>
 
-<!-- ============ POKEMON CARD ============ -->
-<section id="pokemon-section">
-  <div class="section-inner">
-    <h2>Newly Discovered Pok&eacute;mon</h2>
-    <p style="color: var(--muted); margin-bottom: 30px;">Researchers found this one hiding from its own birthday party.</p>
-    <div class="pokemon-card">
-      <div class="pokemon-card-inner">
-        <div class="poke-header">
-          <div>
-            <div class="poke-stage">Stage 1 - Evolves from "Chubby Nerd"</div>
-            <div class="poke-name">TIMOTHEUS</div>
-          </div>
-          <div style="text-align:right;">
-            <span class="poke-hp"><span>HP </span>420</span>
-            <span class="poke-type-badge">&#x1F52E;</span>
-          </div>
+    <section id="gaySection">
+        <h2>Are You Gay?</h2>
+        <p>Let's verify. Science and stuff.</p>
+
+        <img src="https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/ackbar.jpeg" alt="Admiral Ackbar - It's a trap">
+        <p class="image-caption">Seems legit. Nothing suspicious here.</p>
+
+        <div class="gay-scanner">
+            <button id="scanButton">SCAN FOR GAY</button>
+            <div id="scanResult"></div>
         </div>
 
-        <div class="poke-image-frame">
-          <div class="poke-image-text">&#x1F9D4;&#x200D;&#x2642;&#xFE0F;&#x1F4AA;&#x2728;</div>
-        </div>
+        <img id="picard" src="https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/picard_happy.jpeg" alt="Picard Happy" style="display: none;">
+        <p id="picard-caption" class="image-caption" style="display: none;">Results confirmed. Looking good, captain.</p>
+    </section>
 
-        <div class="poke-moves">
-          <div class="poke-move">
-            <div class="poke-move-energy">
-              <div class="energy-dot energy-psychic"></div>
+    <section id="friendshipSection">
+        <h2>Friendship Chart</h2>
+        <p>How many times has Tim tried to get each of us to help with his projects?</p>
+
+        <div class="friendship-chart">
+            <div class="chart-row">
+                <div class="chart-label">
+                    <div>Josh (Me)</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="bar-fill" id="joshBar" style="width: 0%;"></div>
+                </div>
+                <div class="chart-value">∞ times</div>
             </div>
-            <div class="poke-move-info">
-              <div class="poke-move-name">Anxiety Attack</div>
-              <div class="poke-move-desc">Tim becomes paralyzed by the thought of a birthday party with more than 3 people.</div>
-            </div>
-            <div class="poke-move-damage">30</div>
-          </div>
 
-          <div class="poke-move">
-            <div class="poke-move-energy">
-              <div class="energy-dot energy-psychic"></div>
-              <div class="energy-dot energy-normal"></div>
+            <div class="chart-row">
+                <div class="chart-label">
+                    <img src="https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/josh_monocle.jpeg" alt="Josh monocle" class="avatar">
+                    <div>Brittany (His actual wife)</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="bar-fill" style="width: 0%; background: linear-gradient(90deg, #ff6b35, #d4af37);">0</div>
+                </div>
+                <div class="chart-value">0 websites (but she's a saint for putting up with him)</div>
             </div>
-            <div class="poke-move-info">
-              <div class="poke-move-name">Ozempic Injection</div>
-              <div class="poke-move-desc">Sheds 100 lbs. Opponent is confused by the glow-up.</div>
-            </div>
-            <div class="poke-move-damage">100</div>
-          </div>
 
-          <div class="poke-move">
-            <div class="poke-move-energy">
-              <div class="energy-dot energy-psychic"></div>
-              <div class="energy-dot energy-colorless"></div>
+            <div class="chart-row">
+                <div class="chart-label">
+                    <div>Tim's Impulse Purchases</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="bar-fill" id="impulseBar" style="width: 0%;"></div>
+                </div>
+                <div class="chart-value">2 cars + 47 watches</div>
             </div>
-            <div class="poke-move-info">
-              <div class="poke-move-name">Commander Deck Shuffle</div>
-              <div class="poke-move-desc">Fumbles through 100 cards looking for the right land. Has a 40% chance of just scooping.</div>
-            </div>
-            <div class="poke-move-damage">50</div>
-          </div>
+        </div>
+    </section>
+
+    <section id="pokemonSection">
+        <h2>Newly Discovered Pokemon</h2>
+        <p style="color: #b0b0b0; margin-bottom: 30px;">Researchers found this one hiding from his own birthday party.</p>
+        <img src="https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/tim_pokemon_card.png" alt="TIMOTHEUS Pokemon Card - HP 420 - Low-Key Spiraling and Tryhard Beam" style="max-width: 380px; width: 95%; border-radius: 16px; box-shadow: 0 10px 40px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.15); transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.03) rotateY(3deg)'" onmouseout="this.style.transform='scale(1)'">
+        <p style="color: #888; font-size: 0.8rem; margin-top: 15px; font-style: italic;">"Owns multiple controllers. Still blames lag." - 1st Edition, obviously.</p>
+    </section>
+
+    <section id="motivationSection" class="motivation-section">
+        <h2>You Got This, Tim! (Probably)</h2>
+
+        <img src="https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/high_jump_fail.gif" alt="Guy failing at high jump" class="motivation-image">
+
+        <p class="motivation-text">This is basically how Tim approaches every challenge.</p>
+
+        <img src="https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/figure_it_out.jpeg" alt="Tim finding a way to make it work" class="motivation-image">
+
+        <p class="image-caption">Tim finding a way to make it work, as usual.</p>
+
+        <p class="motivation-text">And somehow, he always figures it out.</p>
+    </section>
+
+    <section id="complimentSection">
+        <h2>Compliment Generator</h2>
+        <p>Click the button to generate genuine compliments (which is a rarity).</p>
+
+        <div class="button-group">
+            <button id="complimentButton">GENERATE COMPLIMENT</button>
         </div>
 
-        <div class="poke-footer">
-          <div class="poke-footer-item">
-            <span class="poke-footer-label">weakness</span>
-            <span>&#x1F465; Social gatherings x2</span>
-          </div>
-          <div class="poke-footer-item">
-            <span class="poke-footer-label">resistance</span>
-            <span>&#x1F6E1;&#xFE0F; Insults -30</span>
-          </div>
-          <div class="poke-footer-item">
-            <span class="poke-footer-label">retreat</span>
-            <span>&#x2B50;&#x2B50;&#x2B50;</span>
-          </div>
+        <div class="compliment-box">
+            <span class="compliment-text" id="complimentText">Click the button, you coward.</span>
         </div>
 
-        <div class="poke-flavor">Scientists remain baffled by a creature that can bench press 225 but is scared of his own birthday party.</div>
-        <div class="poke-set">028/151 &bull; &#x2605;</div>
-      </div>
-    </div>
-  </div>
-</section>
+        <div class="compliment-counter">
+            <span id="complimentCounter">0/10 compliments unlocked</span>
+        </div>
+    </section>
 
-<!-- ============ COMPLIMENT GENERATOR ============ -->
-<section id="compliment-section">
-  <div class="section-inner">
-    <h2>Birthday Compliment Generator&trade;</h2>
-    <p style="color: var(--muted); margin-bottom: 10px;">Patent pending. Side effects may include ego inflation and mild discomfort.</p>
-    <div class="compliment-display" id="complimentDisplay">Press the button. You know you want to.</div>
-    <button class="compliment-btn" onclick="generateCompliment()">Generate a Birthday Compliment</button>
-    <div class="compliment-counter" id="complimentCounter"></div>
-  </div>
-</section>
+    <section id="quizSection">
+        <h2>Tim Trivia Challenge</h2>
+        <p>How well do you know yourself? (Spoiler: not very well.)</p>
 
-<!-- ============ QUIZ ============ -->
-<section id="quiz-section">
-  <div class="section-inner">
-    <h2>How Well Do You Know Tim?</h2>
-    <p style="color: var(--muted); margin-bottom: 30px;">Three questions. Zero stakes. The result is already determined.</p>
+        <div class="quiz-question">
+            <p>In 2026, how many impulse car purchases have you made in the past 3 years?</p>
+            <div class="quiz-options">
+                <label class="quiz-option">
+                    <input type="radio" name="question1" value="0"> None, I'm responsible.
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="question1" value="1"> One. That's normal, right?
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="question1" value="2"> Two. Maybe three. Numbers are hard.
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="question1" value="3"> I've lost count. Brittany definitely has.
+                </label>
+            </div>
+        </div>
 
-    <div class="quiz-card">
-      <div class="quiz-question">1. What is Tim's greatest achievement?</div>
-      <button class="quiz-option" onclick="selectQuiz(this, 0)">A) Losing 100 lbs and becoming unreasonably attractive</button>
-      <button class="quiz-option" onclick="selectQuiz(this, 0)">B) Associate Director of Technical Support Engineering (that title barely fits on a business card)</button>
-      <button class="quiz-option" onclick="selectQuiz(this, 0)">C) Raising Finn to be a cool kid</button>
-      <button class="quiz-option" onclick="selectQuiz(this, 0)">D) Surviving a full LOTR extended marathon in an Etsy cape</button>
-    </div>
+        <div class="quiz-question">
+            <p>Your Pokemon card collection represents:</p>
+            <div class="quiz-options">
+                <label class="quiz-option">
+                    <input type="radio" name="question2" value="0"> A childhood nostalgia project.
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="question2" value="1"> A serious investment portfolio.
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="question2" value="2"> An undiagnosed obsession.
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="question2" value="3"> Brittany's reason for couples therapy.
+                </label>
+            </div>
+        </div>
 
-    <div class="quiz-card">
-      <div class="quiz-question">2. What does Tim spend most of his money on?</div>
-      <button class="quiz-option" onclick="selectQuiz(this, 1)">A) Pokemon cards (gotta catch 'em all, apparently literally)</button>
-      <button class="quiz-option" onclick="selectQuiz(this, 1)">B) Magic the Gathering cards (Josh's fault)</button>
-      <button class="quiz-option" onclick="selectQuiz(this, 1)">C) More Pokemon cards</button>
-      <button class="quiz-option" onclick="selectQuiz(this, 1)">D) Even more Pokemon cards, plus sleeves for the Pokemon cards</button>
-    </div>
+        <div class="quiz-question">
+            <p>You took a Comic-Con trip to Calgary with Josh because:</p>
+            <div class="quiz-options">
+                <label class="quiz-option">
+                    <input type="radio" name="question3" value="0"> You're cultured and enjoy conventions.
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="question3" value="1"> Josh convinced you it was a good idea.
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="question3" value="2"> It sounded like an adventure.
+                </label>
+                <label class="quiz-option">
+                    <input type="radio" name="question3" value="3"> You were trying to escape Brittany's disappointment in your spending habits.
+                </label>
+            </div>
+        </div>
 
-    <div class="quiz-card">
-      <div class="quiz-question">3. What is Tim's biggest fear?</div>
-      <button class="quiz-option" onclick="selectQuiz(this, 2)">A) A surprise party</button>
-      <button class="quiz-option" onclick="selectQuiz(this, 2)">B) A regular party</button>
-      <button class="quiz-option" onclick="selectQuiz(this, 2)">C) Being in any room with more than 4 people who expect him to socialize</button>
-      <button class="quiz-option" onclick="selectQuiz(this, 2)">D) Someone asking "so what do you do?" at a party</button>
-    </div>
+        <button id="submitQuiz">SUBMIT ANSWERS</button>
 
-    <button class="quiz-submit" onclick="submitQuiz()">Submit Answers</button>
+        <div id="quizResult" style="display: none;"></div>
+    </section>
 
-    <div class="quiz-result" id="quizResult">
-      <h3>Your Score: It Doesn't Matter</h3>
-      <p style="margin-top: 10px; color: var(--text); line-height: 1.7;">
-        Correct answer to #1: Being Josh's friend. Obviously.<br>
-        Correct answer to #2: All of them. They were all correct.<br>
-        Correct answer to #3: Also all correct. Tim's anxiety is thorough and well-rounded.<br><br>
-        <span style="color: var(--muted); font-style: italic;">The only thing that matters is that Tim is old now. Like, another year older. That's a lot of years.</span>
-      </p>
-    </div>
-  </div>
-</section>
+    <section id="rsvpSection" class="rsvp-section">
+        <p class="fancy-text">You Are Cordially Invited</p>
 
-<!-- ============ RSVP ============ -->
-<section id="rsvp-section">
-  <div class="section-inner">
-    <div class="rsvp-card">
-      <div class="rsvp-ornament">&#x2726; &#x2726; &#x2726;</div>
-      <div class="rsvp-title">You Are Cordially Invited</div>
-      <div class="rsvp-subtitle">to a celebration of unparalleled sophistication</div>
-      <div class="rsvp-body">
-        The pleasure of your company is requested at the finest dining establishment known to humankind:<br><br>
-        <strong style="font-size: 1.5em; letter-spacing: 3px;">WAFFLE HOUSE</strong><br><br>
-        In honor of your birthday, which you didn't want to celebrate, but too bad.<br><br>
-        <span style="color: var(--muted); font-size: 0.85rem;">Dress code: Whatever. It's Waffle House.<br>
-        Attendance: Just us. We both know you'd panic otherwise.</span>
-      </div>
+        <div class="coupon-teaser">
+            In honor of your birthday, you will receive ONE (1) coupon, redeemable for anything you want at Waffle House or McDonald's. But first, you must prove yourself worthy by completing this entire page.
+        </div>
 
-      <div style="font-weight: 700; color: var(--gold); margin-bottom: 20px;">R.S.V.P.</div>
+        <div class="button-group">
+            <button id="yesButton">YES, I'M IN</button>
+            <button id="noButton">NO, I'M LAME</button>
+        </div>
+    </section>
 
-      <div class="rsvp-buttons">
-        <button class="rsvp-btn yes" onclick="rsvpClick()">Yes, I Accept</button>
-        <button class="rsvp-btn also-yes" onclick="rsvpClick()">Also Yes</button>
-      </div>
+    <section id="closingSection" class="closing-section">
+        <h2>The Real Stuff</h2>
 
-      <div class="rsvp-response" id="rsvpResponse">
-        Great. Josh is buying. Don't order anything expensive.<br>
-        <span style="font-size: 0.9rem; color: var(--muted);">It's Waffle House, so you literally can't.</span>
-      </div>
-    </div>
-  </div>
-</section>
+        <img src="https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/tim_and_josh.jpeg" alt="Tim and Josh with cigars" class="closing-image">
 
-<!-- ============ CLOSER ============ -->
-<section id="closer-section">
-  <div class="section-inner">
-    <div class="closer-text">
-      <p>For real though, Tim.</p>
-      <p>You've absolutely crushed it this year. You dropped 100 pounds. You're killing it at nCino. Finn's got one of the best dads walking around. And somewhere along the way, we went from coworkers to whatever this is, which is apparently "two grown men in Etsy cloaks watching all 12 hours of Lord of the Rings."</p>
-      <p>You're one of my favorite humans. I'm glad you exist. Happy birthday, man.</p>
-      <p>Now stop reading this and text me back about Waffle House.</p>
-    </div>
-    <div class="closer-sign">- Josh</div>
-    <div class="closer-year">March 28, 2026</div>
-  </div>
-</section>
+        <img src="https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/bachelor_party.jpeg" alt="Group party photo" class="closing-image">
 
-<!-- Fourth Wall Break -->
-<div class="fourth-wall" id="fourthWall" onclick="dismissFourthWall()"></div>
+        <img src="https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/tim_career.jpeg" alt="Tim at tech conference" class="closing-image">
 
-<script>
-// =================== HERO CONFETTI ===================
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    confetti({ particleCount: 150, spread: 100, origin: { y: 0.4 }, colors: ['#e23636', '#ffd700', '#ffffff'] });
-  }, 800);
-  setTimeout(() => {
-    confetti({ particleCount: 80, spread: 70, origin: { x: 0.2, y: 0.5 }, colors: ['#e23636', '#ffd700'] });
-    confetti({ particleCount: 80, spread: 70, origin: { x: 0.8, y: 0.5 }, colors: ['#e23636', '#ffd700'] });
-  }, 1200);
-});
+        <div class="fourth-wall">
+            <p>Okay, real talk for a second. (Josh here, fourth wall be damned.)</p>
+        </div>
 
-// =================== GAY SCAN ===================
-const scanMessages = [
-  "Initializing scanner...",
-  "Analyzing browser history...",
-  "Cross-referencing Pokemon card collection...",
-  "Scanning Madden play history...",
-  "Checking Ozempic prescription records...",
-  "Evaluating Lord of the Rings extended edition watch count...",
-  "Reviewing Etsy cloak purchase history...",
-  "Consulting the Magic the Gathering community...",
-  "Counting number of times Tim said 'that's what she said'...",
-  "Calculating results..."
-];
-let scanRunning = false;
+        <p class="closing-text">
+            Tim, you're a weird dude. You buy watches like other people buy groceries. Your Pokemon card collection confuses everyone who knows you. You'd rather reschedule plans than just show up to them. And yet, somehow, you've built this life that works. You've got Brittany, who is either the most patient woman alive or running a long con we don't understand yet. You've got people who care about you, even when you text them back like you're on dial-up. You got the glow-up that nobody expected. You became the guy who figures it out, no matter how improbable the situation.
+        </p>
 
-function startScan() {
-  if (scanRunning) return;
-  scanRunning = true;
-  const btn = document.getElementById('gayBtn');
-  const container = document.getElementById('scanContainer');
-  const bar = document.getElementById('scanBar');
-  const text = document.getElementById('scanText');
-  const result = document.getElementById('scanResult');
+        <p class="closing-text">
+            The Comic-Con trip to Calgary with you was one of my favorite memories. Watching you discover new things, laugh at weird niche stuff, just exist without overthinking for a few days. That's the version of you that makes 47 look pretty good.
+        </p>
 
-  btn.style.display = 'none';
-  container.style.display = 'block';
-  result.style.display = 'none';
+        <p class="closing-text">
+            Brittany deserves a medal, several vacations, and probably some kind of saint certification, but she keeps showing up. You somehow turned "I should maybe take fitness more seriously" into a complete transformation. And you did it your way, which is the most Tim thing possible.
+        </p>
 
-  let progress = 0;
-  let msgIndex = 0;
+        <p class="closing-text">
+            So on your 47th birthday, here's what I want you to know: You're worth celebrating. Not despite the weird spending habits, not despite the impulse purchases, not despite texting like a caveman. Because of the weird dude you've chosen to be, and because you've actually built something good.
+        </p>
 
-  const interval = setInterval(() => {
-    progress += Math.random() * 12 + 3;
-    if (progress > 100) progress = 100;
-    bar.style.width = progress + '%';
+        <p class="closing-text">
+            Happy birthday, you beautiful disaster.
+        </p>
+    </section>
 
-    if (msgIndex < scanMessages.length) {
-      text.textContent = scanMessages[msgIndex];
-      msgIndex++;
-    }
+    <section id="lootBoxSection" class="loot-box-section">
+        <h2>Your Birthday Present</h2>
+        <p>You made it. Click the box.</p>
 
-    if (progress >= 100) {
-      clearInterval(interval);
-      setTimeout(() => {
-        container.style.display = 'none';
-        result.style.display = 'block';
-        confetti({ particleCount: 200, spread: 120, origin: { y: 0.6 }, colors: ['#ff0000', '#ff6b6b', '#ffaa00', '#00ff00', '#0066ff', '#8b00ff'] });
-      }, 500);
-    }
-  }, 400);
-}
+        <div class="loot-box locked" id="lootBox">
+            <span id="lootBoxIcon">????</span>
+        </div>
 
-// =================== CHART ANIMATION ===================
-let chartAnimated = false;
-const chartObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && !chartAnimated) {
-      chartAnimated = true;
-      document.getElementById('joshBar').classList.add('animated');
-    }
-  });
-}, { threshold: 0.3 });
-chartObserver.observe(document.getElementById('chartContainer'));
+        <p id="lockMessage" style="color: #b0b0b0; font-style: italic;">Complete all sections above to unlock this present.</p>
 
-// =================== COMPLIMENTS ===================
-const compliments = [
-  "Tim, you have an incredibly sculpted and impressively large penis. Scientists have tried to study it but keep getting intimidated.",
-  "You're the only person I know who lost 100 lbs and somehow got MORE annoying.",
-  "Your Pokemon card collection is worth more than your house and honestly that's kind of inspiring.",
-  "You're like if Deadpool had anxiety and a Costco membership.",
-  "Finn is going to grow up and realize his dad is the coolest nerd alive. Or he's going to be deeply embarrassed. Either way, you're memorable.",
-  "You make support engineering look like a contact sport and I respect that.",
-  "Your glow-up is so aggressive that people who knew you before need therapy.",
-  "You're the only man I'd willingly wear a cloak with for 12 consecutive hours. That's love.",
-  "If they made a Madden card of you, your awareness rating would be 99 but your social stamina would be 12.",
-  "Your commander deck is mid but your heart is legendary. I'm the one who bought it, so I'd know.",
-  "Tim, you're proof that you can be jacked, anxious, and obsessed with children's trading cards all at the same time. You contain multitudes.",
-  "The fact that you're trying to complete a full Pokemon set as a grown adult with a mortgage is either incredibly cool or clinically concerning. I choose to believe both.",
-  "Happy birthday to the only Associate Director of Technical Support Engineering who could also solo a Balrog. Probably.",
-];
-let complimentIndex = -1;
+        <div id="couponContainer" style="display: none;">
+            <div class="coupon-card" id="couponCard">
+                <img src="https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/josh_monocle.jpeg" alt="Chief Coupon Officer" class="coupon-issuer">
 
-function generateCompliment() {
-  complimentIndex = (complimentIndex + 1) % compliments.length;
-  const display = document.getElementById('complimentDisplay');
-  display.style.opacity = 0;
-  setTimeout(() => {
-    display.textContent = '"' + compliments[complimentIndex] + '"';
-    display.style.opacity = 1;
-  }, 200);
-  document.getElementById('complimentCounter').textContent = (complimentIndex + 1) + ' of ' + compliments.length + ' compliments unlocked';
-}
+                <div class="coupon-title">OFFICIAL BIRTHDAY COUPON</div>
 
-// =================== QUIZ ===================
-function selectQuiz(btn, questionIndex) {
-  const card = btn.parentElement;
-  card.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-}
+                <div class="coupon-detail">
+                    This entitles Timothy<br>
+                    to ONE (1) free item
+                </div>
 
-function submitQuiz() {
-  const result = document.getElementById('quizResult');
-  result.style.display = 'block';
-  result.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  confetti({ particleCount: 60, spread: 50, origin: { y: 0.7 }, colors: ['#ffd700', '#e23636'] });
-}
+                <div class="coupon-detail" style="margin: 25px 0;">
+                    Redeemable at:<br>
+                    Waffle House or McDonald's
+                </div>
 
-// =================== RSVP ===================
-function rsvpClick() {
-  const response = document.getElementById('rsvpResponse');
-  response.style.display = 'block';
-  confetti({ particleCount: 100, spread: 80, origin: { y: 0.6 }, colors: ['#ffd700', '#e23636', '#fff'] });
-  document.querySelectorAll('.rsvp-btn').forEach(btn => {
-    btn.style.opacity = '0.5';
-    btn.style.pointerEvents = 'none';
-  });
-}
+                <div class="coupon-detail">
+                    Issued by:<br>
+                    Josh Bowman<br>
+                    Chief Coupon Officer
+                </div>
 
-// =================== FOURTH WALL BREAK ===================
-const fourthWallMessages = [
-  "Hey. Yeah, you. Tim's still scrolling, isn't he? Tell him to text Josh back.",
-  "You're STILL reading? Okay, I respect the commitment. Unlike Tim's commitment to texting back.",
-  "This is a website about Tim. Why are YOU still here? Do you need a website too?",
-  "Plot twist: the real birthday gift was the scrolling you did along the way.",
-  "Deadpool would've broken this fourth wall way earlier. I'm just fashionably late.",
-  "If you've made it this far, you legally owe Josh a Waffle House hash brown.",
-];
-let fwIndex = 0;
+                <div class="coupon-fine-print">
+                    <p>* Expires April 28, 2026.</p>
+                    <p>* Limit one (1) coupon per birthday. Tim only gets one birthday per year, despite what his Amazon wishlist suggests.</p>
+                    <p>* Non-transferable. Brittany cannot use this coupon, though she deserves one of her own for putting up with you.</p>
+                    <p>* Maximum value: $15. If you somehow spend $15 at Waffle House, Josh will be both impressed and concerned.</p>
+                    <p>* Coupon issuer reserves the right to order the same thing and pretend it was his idea.</p>
+                    <p>* Not valid at any establishment where Tim has been banned for talking about Pokemon cards too loudly.</p>
+                    <p>* By accepting this coupon, Tim agrees to text Josh back within 48 hours for the next 30 days.</p>
+                    <p>* Void where prohibited by Josh's mood, budget, or energy level.</p>
+                    <p>* This coupon was designed by an AI at 3am and reviewed by zero legal professionals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-function showFourthWall() {
-  const fw = document.getElementById('fourthWall');
-  fw.textContent = fourthWallMessages[fwIndex % fourthWallMessages.length];
-  fw.classList.add('show');
-}
+    <script>
+        const completionState = {
+            gayButton: false,
+            friendshipChart: false,
+            complimentGenerated: false,
+            quizSubmitted: false,
+            rsvpClicked: false
+        };
 
-function dismissFourthWall() {
-  const fw = document.getElementById('fourthWall');
-  fw.classList.remove('show');
-  fwIndex++;
-  setTimeout(showFourthWall, 15000);
-}
+        const compliments = [
+            "You've somehow convinced a saint to marry you. That takes actual talent.",
+            "Your glow-up was real. Those 100 lbs didn't stand a chance against your determination.",
+            "Brittany is a saint. Seriously. Nominate her for something.",
+            "You made Comic-Con in Calgary memorable. That's not nothing.",
+            "The UNCW scholarship was huge. You should be proud of that.",
+            "You figured out steaks. That's a win in anyone's book.",
+            "You share your life with someone, and that someone chose to stay. That says something.",
+            "You actually show up for people who matter. Even if it takes you a while to text back.",
+            "47 and still learning new things about yourself. Not everyone does that.",
+            "You're the guy who figures it out. Everyone knows that about you."
+        ];
 
-setTimeout(showFourthWall, 8000);
-</script>
+        const insults = [
+            "Tim, you're 47 now. Your metabolism left the chat years ago. Ozempic is doing all the heavy lifting.",
+            "You have the texting speed of a man who just discovered phones exist.",
+            "Your Pokemon card collection is a cry for help disguised as a hobby.",
+            "Brittany deserves a medal. Actually, several medals. And a vacation. Without you.",
+            "You bought a new car three years in a row. That's not a hobby, Tim. That's a condition.",
+            "47 years old and still scared of birthday parties. That's not quirky. That's a therapy bill.",
+            "Your commander deck is bad and you should feel bad. (I bought it, so that's on me.)",
+            "You can't text back, but you can buy Pokemon cards at midnight. Your priorities are weird.",
+            "Brittany doesn't put up with your spending habits. She endures them. There's a difference.",
+            "You've turned impulse buying into an art form. It's not a hobby, it's a lifestyle."
+        ];
 
+        let complimentIndex = 0;
+        let insultIndex = 0;
+        let isInsultMode = false;
+
+        function updateProgress() {
+            const completed = Object.values(completionState).filter(v => v).length;
+            const total = Object.keys(completionState).length;
+
+            document.getElementById('progressFill').style.width = (completed / total) * 100 + '%';
+            document.getElementById('progressText').textContent = completed + '/' + total;
+
+            const allComplete = completed === total;
+            const lootBox = document.getElementById('lootBox');
+            const lockMessage = document.getElementById('lockMessage');
+
+            if (allComplete) {
+                lootBox.classList.remove('locked');
+                lootBox.classList.add('unlocked');
+                lootBox.textContent = '🎁';
+                lockMessage.style.display = 'none';
+            }
+        }
+
+        document.getElementById('scanButton').addEventListener('click', function() {
+            completionState.gayButton = true;
+            updateProgress();
+
+            const scanResult = document.getElementById('scanResult');
+            scanResult.innerHTML = '<div class="scan-result">SCANNING...</div>';
+
+            setTimeout(() => {
+                scanResult.innerHTML = '<div class="scan-result">Results: Yes. Obviously.</div>';
+                document.getElementById('picard').style.display = 'block';
+                document.getElementById('picard-caption').style.display = 'block';
+            }, 1500);
+        });
+
+        window.addEventListener('load', function() {
+            completionState.friendshipChart = true;
+            updateProgress();
+
+            const bars = ['joshBar', 'impulseBar'];
+            const targets = [100, 95];
+
+            bars.forEach((id, index) => {
+                const element = document.getElementById(id);
+                const target = targets[index];
+                let current = 0;
+                const increment = target / 20;
+
+                const interval = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(interval);
+                    }
+                    element.style.width = current + '%';
+                }, 100);
+            });
+        });
+
+        document.getElementById('complimentButton').addEventListener('click', function() {
+            completionState.complimentGenerated = true;
+            updateProgress();
+
+            const complimentText = document.getElementById('complimentText');
+            const counter = document.getElementById('complimentCounter');
+            const button = document.getElementById('complimentButton');
+            const box = document.querySelector('.compliment-box');
+
+            if (!isInsultMode) {
+                if (complimentIndex < compliments.length) {
+                    complimentText.textContent = compliments[complimentIndex];
+                    complimentIndex++;
+                    counter.textContent = complimentIndex + '/10 compliments unlocked';
+
+                    playDingSound();
+
+                    if (complimentIndex === compliments.length) {
+                        setTimeout(() => {
+                            button.textContent = 'GENERATE AN INSULT';
+                            button.style.background = 'linear-gradient(135deg, #9d4edd 0%, #7209b7 100%)';
+                            button.style.borderColor = '#9d4edd';
+                            box.classList.remove('compliment-box');
+                            box.classList.add('insult-box');
+                            isInsultMode = true;
+                            counter.textContent = '10/10 compliments unlocked. Want some insults instead?';
+                        }, 500);
+                    }
+                }
+            } else {
+                if (insultIndex < insults.length) {
+                    complimentText.textContent = insults[insultIndex];
+                    insultIndex++;
+
+                    playBuzzerSound();
+
+                    if (insultIndex === insults.length) {
+                        setTimeout(() => {
+                            complimentText.textContent = 'OK fine, I still love you. Happy birthday, old man.';
+                            button.textContent = 'YOU ARE LOVED';
+                            button.style.background = 'linear-gradient(135deg, #d4af37 0%, #ffd700 100%)';
+                            button.style.borderColor = '#d4af37';
+                            button.style.color = '#1a1a1a';
+                        }, 500);
+                    }
+                }
+            }
+        });
+
+        document.getElementById('submitQuiz').addEventListener('click', function() {
+            completionState.quizSubmitted = true;
+            updateProgress();
+
+            const q1 = document.querySelector('input[name="question1"]:checked');
+            const q2 = document.querySelector('input[name="question2"]:checked');
+            const q3 = document.querySelector('input[name="question3"]:checked');
+
+            if (!q1 || !q2 || !q3) {
+                alert('Answer all questions, you coward!');
+                return;
+            }
+
+            const score = parseInt(q1.value) + parseInt(q2.value) + parseInt(q3.value);
+            const resultDiv = document.getElementById('quizResult');
+            const resultElement = document.createElement('div');
+            resultElement.className = 'quiz-result';
+
+            let resultText = 'Your Score: It Doesn\'t Matter';
+            if (score >= 6) {
+                resultText += '<br>You know yourself. That\'s terrifying.';
+            } else if (score >= 3) {
+                resultText += '<br>You\'re figuring it out. Progress.';
+            } else {
+                resultText += '<br>You have no idea. Classic Tim.';
+            }
+
+            const promotedImg = document.createElement('img');
+            promotedImg.src = 'https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/promoted.jpeg';
+            promotedImg.alt = 'Promoted';
+            promotedImg.style.maxWidth = '100%';
+            promotedImg.style.marginTop = '15px';
+            promotedImg.style.borderRadius = '8px';
+
+            resultElement.innerHTML = resultText;
+            resultElement.appendChild(promotedImg);
+            resultDiv.innerHTML = '';
+            resultDiv.appendChild(resultElement);
+            resultDiv.style.display = 'block';
+        });
+
+        document.getElementById('yesButton').addEventListener('click', function() {
+            completionState.rsvpClicked = true;
+            updateProgress();
+            alert('Excellent choice. Waffle House or McDonald\'s awaits!');
+        });
+
+        document.getElementById('noButton').addEventListener('click', function() {
+            completionState.rsvpClicked = true;
+            updateProgress();
+            alert('Brittany would be disappointed. Reconsider.');
+        });
+
+        document.getElementById('lootBox').addEventListener('click', function() {
+            if (!this.classList.contains('unlocked')) {
+                return;
+            }
+
+            this.classList.remove('unlocked');
+            this.classList.add('shaking');
+
+            setTimeout(() => {
+                this.classList.remove('shaking');
+                this.classList.add('glowing');
+            }, 2000);
+
+            setTimeout(() => {
+                this.classList.remove('glowing');
+                this.style.opacity = '0';
+                this.style.pointerEvents = 'none';
+
+                const couponContainer = document.getElementById('couponContainer');
+                couponContainer.style.display = 'block';
+
+                const couponCard = document.getElementById('couponCard');
+                couponCard.classList.add('revealed');
+
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+
+                playFanfareSound();
+
+                document.getElementById('lockMessage').style.display = 'none';
+            }, 4000);
+        });
+
+        function playDingSound() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.value = 800;
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.3);
+        }
+
+        function playBuzzerSound() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.setValueAtTime(150, audioContext.currentTime);
+            oscillator.frequency.linearRampToValueAtTime(100, audioContext.currentTime + 0.3);
+
+            gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.3);
+        }
+
+        function playFanfareSound() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const notes = [523, 659, 784, 1047]; // C5, E5, G5, C6
+            const duration = 0.2;
+
+            notes.forEach((freq, index) => {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                oscillator.frequency.value = freq;
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime + index * duration);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + index * duration + duration);
+
+                oscillator.start(audioContext.currentTime + index * duration);
+                oscillator.stop(audioContext.currentTime + index * duration + duration);
+            });
+        }
+
+        updateProgress();
+    </script>
 </body>
 </html>
