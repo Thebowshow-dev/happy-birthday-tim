@@ -64,1053 +64,427 @@
 
         h1 {
             font-family: 'Bangers', cursive;
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            color: #ff6b35;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 107, 53, 0.5);
+            font-size: 3.5em;
+            color: #ffd700;
+            text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.8), 6px 6px 0px rgba(212, 175, 55, 0.3);
             margin-bottom: 10px;
+            animation: bounce 0.6s ease-in-out;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #ff6b35;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            background: rgba(30, 30, 30, 0.8);
+            border: 2px solid #d4af37;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .section h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5em;
+            color: #d4af37;
+            margin-bottom: 20px;
+            text-transform: uppercase;
             letter-spacing: 2px;
         }
 
-        .hero-subtext {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
-            color: #d4af37;
-            margin-bottom: 20px;
-        }
-
-        .completion-notice {
-            background: rgba(212, 175, 55, 0.15);
-            border: 2px solid #d4af37;
-            border-radius: 8px;
-            padding: 16px 24px;
-            margin-top: 20px;
-            font-size: 0.95rem;
-            color: #ffd700;
-            font-weight: 700;
-            box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.1), 0 0 20px rgba(212, 175, 55, 0.2);
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.1), 0 0 20px rgba(212, 175, 55, 0.2); }
-            50% { box-shadow: inset 0 0 30px rgba(212, 175, 55, 0.2), 0 0 30px rgba(212, 175, 55, 0.4); }
-        }
-
-        section {
-            max-width: 800px;
-            margin: 40px auto;
-            background: rgba(30, 30, 30, 0.8);
-            border: 2px solid #ff6b35;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            position: relative;
-        }
-
-        section h2 {
-            font-family: 'Bangers', cursive;
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            color: #d4af37;
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-            margin: 15px 0;
-        }
-
-        .image-caption {
-            font-size: 0.9rem;
-            color: #b0b0b0;
-            font-style: italic;
-            text-align: center;
-            margin-top: -10px;
-            margin-bottom: 15px;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 15px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
         button {
+            background: linear-gradient(135deg, #d4af37 0%, #ff6b35 100%);
+            color: #000;
+            border: none;
             padding: 12px 24px;
-            font-size: 1rem;
-            font-family: 'Bangers', cursive;
-            border: 2px solid #d4af37;
-            background: linear-gradient(135deg, #2d1b1b 0%, #1a1a1a 100%);
-            color: #d4af37;
-            border-radius: 8px;
+            font-size: 1em;
+            border-radius: 5px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-            text-transform: uppercase;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-family: 'Inter', sans-serif;
         }
 
         button:hover {
-            background: linear-gradient(135deg, #ff6b35 0%, #d4af37 100%);
-            color: #1a1a1a;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
-            transform: translateY(-2px);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
         }
 
         button:active {
-            transform: translateY(0);
+            transform: scale(0.95);
         }
 
-        .gay-scanner {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .scan-result {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.9rem;
-            color: #ff6b35;
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(255, 107, 53, 0.1);
-            border: 2px solid #ff6b35;
-            border-radius: 8px;
-            animation: scan-flash 0.5s ease;
-        }
-
-        @keyframes scan-flash {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
-
-        .friendship-chart {
-            margin: 20px 0;
-        }
-
-        .chart-row {
-            display: flex;
-            align-items: center;
-            margin: 15px 0;
-            gap: 15px;
-        }
-
-        .chart-label {
-            min-width: 150px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #d4af37;
-        }
-
-        .chart-bar {
-            flex: 1;
-            height: 30px;
-            background: rgba(212, 175, 55, 0.2);
-            border: 1px solid #d4af37;
-            border-radius: 4px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #ff6b35, #d4af37);
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 10px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #1a1a1a;
-            width: 0%;
-            transition: width 2s ease-out;
-        }
-
-        .chart-value {
-            min-width: 80px;
-            text-align: right;
-            font-size: 0.9rem;
-            color: #b0b0b0;
-        }
-
-        /* Pokemon card is now an image - no CSS needed */
-
-        .motivation-section {
-            text-align: center;
-        }
-
-        .motivation-image {
-            border-radius: 12px;
-            max-width: 100%;
-            margin: 20px 0;
-        }
-
-        .motivation-text {
-            font-size: 1.1rem;
-            color: #e0e0e0;
-            margin: 20px 0;
-            font-style: italic;
-        }
-
-        .compliment-box {
-            background: rgba(212, 175, 55, 0.1);
-            border: 2px solid #d4af37;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-            text-align: center;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .compliment-text {
-            font-size: 1.1rem;
-            font-style: italic;
-            color: #ffd700;
-            font-weight: 700;
-        }
-
-        .insult-box {
-            background: rgba(128, 0, 128, 0.1);
-            border: 2px solid #9d4edd;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-            text-align: center;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .insult-text {
-            font-size: 1.1rem;
-            font-style: italic;
-            color: #ff6b35;
-            font-weight: 700;
-        }
-
-        .compliment-counter {
-            font-size: 0.85rem;
-            color: #b0b0b0;
-            margin-top: 15px;
-        }
-
-        .quiz-section {
-            margin: 30px 0;
-        }
-
-        .quiz-question {
-            background: rgba(255, 107, 53, 0.1);
-            border: 1px solid #ff6b35;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 15px 0;
-        }
-
-        .quiz-question p {
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .quiz-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .quiz-option {
-            padding: 10px 15px;
-            background: rgba(30, 30, 30, 0.8);
-            border: 2px solid #b0b0b0;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: left;
-        }
-
-        .quiz-option:hover {
-            background: rgba(212, 175, 55, 0.2);
-            border-color: #d4af37;
-        }
-
-        .quiz-option input {
-            margin-right: 10px;
-        }
-
-        .quiz-result {
-            background: rgba(255, 107, 53, 0.15);
+        .result-display {
+            background: rgba(0, 0, 0, 0.5);
             border: 2px solid #ff6b35;
             border-radius: 8px;
             padding: 20px;
             margin-top: 20px;
-            text-align: center;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1rem;
-            color: #ff6b35;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            word-wrap: break-word;
+            font-family: 'Courier New', monospace;
         }
 
-        .rsvp-section {
-            text-align: center;
-        }
-
-        .fancy-text {
-            font-family: 'Bangers', cursive;
-            font-size: 1.5rem;
-            color: #d4af37;
-            margin: 20px 0;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-        }
-
-        .coupon-teaser {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(255, 107, 53, 0.1) 100%);
-            border: 2px dashed #d4af37;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-            font-size: 1rem;
-            color: #e0e0e0;
-            line-height: 1.8;
-        }
-
-        .closing-section {
-            text-align: center;
-        }
-
-        .closing-image {
-            border-radius: 12px;
-            max-width: 100%;
-            margin: 20px 0;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-        }
-
-        .closing-text {
-            font-size: 1.05rem;
-            color: #e0e0e0;
-            margin: 20px 0;
-            line-height: 1.8;
-        }
-
-        .loot-box-section {
-            text-align: center;
-            padding: 40px 20px;
+        .result-display.hidden {
+            display: none;
         }
 
         .loot-box {
-            width: 200px;
-            height: 200px;
-            margin: 30px auto;
-            background: linear-gradient(135deg, #d4af37 0%, #ffd700 50%, #d4af37 100%);
-            border: 5px solid #8b7500;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #d4af37 0%, #ffd700 100%);
+            border: 3px solid #8b7500;
             border-radius: 8px;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            margin: 20px auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Bangers', cursive;
-            font-size: 3rem;
-        }
-
-        .loot-box.locked {
-            background: linear-gradient(135deg, #666 0%, #999 50%, #666 100%);
-            border-color: #333;
-            color: #333;
-            cursor: not-allowed;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-        }
-
-        .loot-box.locked::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='65' text-anchor='middle' font-size='50' fill='%23333'%3E%F0%9F%94%92%3C/text%3E%3C/svg%3E") center/60px no-repeat;
-            pointer-events: none;
-        }
-
-        .loot-box.unlocked {
+            font-size: 3em;
             cursor: pointer;
-            animation: unlock-glow 0.6s ease;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4), inset 0 -2px 5px rgba(0, 0, 0, 0.2);
         }
 
-        @keyframes unlock-glow {
-            0% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
-            50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.8); }
-            100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+        .loot-box:hover {
+            transform: scale(1.1) rotateY(10deg);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6), inset 0 -2px 5px rgba(0, 0, 0, 0.2);
         }
 
-        .loot-box.unlocked:hover {
-            transform: scale(1.05);
+        .loot-box:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3), inset 0 -1px 3px rgba(0, 0, 0, 0.3);
         }
 
-        @keyframes shake {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            10% { transform: translate(-5px, -5px) rotate(-1deg); }
-            20% { transform: translate(5px, 5px) rotate(1deg); }
-            30% { transform: translate(-5px, 5px) rotate(-1deg); }
-            40% { transform: translate(5px, -5px) rotate(1deg); }
-            50% { transform: translate(-5px, -5px) rotate(-1deg); }
-            60% { transform: translate(5px, 5px) rotate(1deg); }
-            70% { transform: translate(-5px, 5px) rotate(-1deg); }
-            80% { transform: translate(5px, -5px) rotate(1deg); }
-            90% { transform: translate(-5px, -5px) rotate(-1deg); }
-        }
-
-        .loot-box.shaking {
-            animation: shake 2s ease !important;
-        }
-
-        @keyframes golden-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.2); }
-            50% { box-shadow: 0 0 50px rgba(212, 175, 55, 1), inset 0 0 30px rgba(255, 255, 255, 0.4); }
-        }
-
-        .loot-box.glowing {
-            animation: golden-glow 2s ease !important;
-        }
-
-        .coupon-card {
-            background: linear-gradient(135deg, #ffe4a0 0%, #ffd700 100%);
-            border: 5px solid #8b7500;
-            border-radius: 12px;
-            padding: 40px;
-            max-width: 500px;
-            margin: 30px auto;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
-            color: #1a1a1a;
-            font-family: 'Arial', sans-serif;
+        .pokemon-card {
+            width: 300px;
+            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             text-align: center;
-            animation: coupon-slide 0.8s ease;
-            opacity: 0;
+            font-family: 'Arial', sans-serif;
         }
 
-        .coupon-card.revealed {
-            opacity: 1;
+        .pokemon-card h3 {
+            color: #333;
+            margin: 10px 0;
+            font-size: 1.3em;
         }
 
-        @keyframes coupon-slide {
-            0% {
-                opacity: 0;
-                transform: translateY(30px) scale(0.9);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+        .pokemon-card p {
+            color: #666;
+            margin: 5px 0;
+            font-size: 0.9em;
         }
 
-        .coupon-issuer {
+        .pokemon-image {
+            width: 150px;
+            height: 150px;
+            margin: 10px auto;
+            background: #eee;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .pokemon-image img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .pokemon-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .stat {
+            background: #f5f5f5;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            color: #333;
+        }
+
+        .stat-label {
+            font-weight: bold;
+            color: #d4af37;
+        }
+
+        input[type="text"], input[type="number"], select {
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #d4af37;
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #e0e0e0;
+            font-size: 1em;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]::placeholder, input[type="number"]::placeholder {
+            color: #999;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus, select:focus {
+            outline: none;
+            border-color: #ff6b35;
+            box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+        }
+
+        .section-divider {
+            border-top: 2px solid #d4af37;
+            margin: 30px 0;
+        }
+
+        .party-head {
             width: 80px;
             height: 80px;
+            margin: 10px;
+            display: inline-block;
+            text-align: center;
+            line-height: 80px;
+            font-size: 2em;
+            background: rgba(212, 175, 55, 0.2);
+            border: 2px solid #d4af37;
             border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #8b7500;
-            margin: 0 auto 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
-        .coupon-title {
-            font-family: 'Bangers', cursive;
-            font-size: 2rem;
-            color: #d4af37;
+        .party-container {
+            text-align: center;
             margin: 20px 0;
-            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
         }
 
-        .coupon-detail {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #333;
+        .insult-display {
+            background: rgba(255, 107, 53, 0.1);
+            border-left: 4px solid #ff6b35;
+            padding: 15px;
             margin: 15px 0;
-            line-height: 1.6;
-        }
-
-        .coupon-fine-print {
-            font-size: 7px;
-            color: #666;
-            text-align: left;
-            line-height: 1.3;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 2px solid #8b7500;
-        }
-
-        .coupon-fine-print p {
-            margin: 3px 0;
-        }
-
-        .fourth-wall {
-            background: rgba(128, 0, 128, 0.1);
-            border-left: 4px solid #9d4edd;
-            padding: 15px 20px;
-            margin: 20px 0;
-            font-size: 0.95rem;
-            color: #e0e0e0;
+            border-radius: 4px;
             font-style: italic;
-        }
-
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            section {
-                margin: 20px 10px;
-                padding: 20px;
-            }
-
-            .progress-tracker {
-                top: 10px;
-                right: 10px;
-                font-size: 8px;
-                padding: 8px 12px;
-            }
-
-            .chart-label {
-                min-width: 120px;
-                font-size: 0.9rem;
-            }
-
-            .button-group {
-                gap: 10px;
-            }
-
-            button {
-                padding: 10px 16px;
-                font-size: 0.9rem;
-            }
-
-            .loot-box {
-                width: 150px;
-                height: 150px;
-                font-size: 2rem;
-            }
-
-            .coupon-card {
-                padding: 20px;
-                margin: 20px 10px;
-            }
+            color: #ffb3a1;
         }
     </style>
 </head>
 <body>
     <div class="progress-tracker">
-        <div>PROGRESS</div>
+        PROGRESS
         <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
+            <div class="progress-fill"></div>
         </div>
-        <div id="progressText" style="text-align: center; margin-top: 8px; font-size: 11px;">0/5</div>
     </div>
 
     <header>
         <h1>Happy Birthday Tim!</h1>
-        <p class="hero-subtext">You're 47. And still fabulous.</p>
-        <div class="completion-notice">
-            IMPORTANT: Complete every section on this page to unlock your birthday present at the bottom. Yes, there's actually a present. No, you can't skip ahead.
-        </div>
+        <p class="subtitle">A celebration of questionable taste and even worse puns</p>
     </header>
 
-    <section id="gaySection">
-        <h2>Are You Gay?</h2>
-        <p>Let's verify. Science and stuff.</p>
-
-        <img src="https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/ackbar.jpeg" alt="Admiral Ackbar - It's a trap">
-        <p class="image-caption">Seems legit. Nothing suspicious here.</p>
-
-        <div class="gay-scanner">
-            <button id="scanButton">SCAN FOR GAY</button>
-            <div id="scanResult"></div>
+    <div class="container">
+        <!-- Loot Box Section -->
+        <div class="section">
+            <h2>Loot Box - Click to Open</h2>
+            <p>Click the golden box to see what Tim might win:</p>
+            <div class="loot-box" id="lootBox">📦</div>
+            <div class="result-display hidden" id="lootResult"></div>
         </div>
 
-        <img id="picard" src="https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/picard_happy.jpeg" alt="Picard Happy" style="display: none;">
-        <p id="picard-caption" class="image-caption" style="display: none;">Results confirmed. Looking good, captain.</p>
-    </section>
-
-    <section id="friendshipSection">
-        <h2>Friendship Chart</h2>
-        <p>How many times has Tim tried to get each of us to help with his projects?</p>
-
-        <div class="friendship-chart">
-            <div class="chart-row">
-                <div class="chart-label">
-                    <div>Josh (Me)</div>
-                </div>
-                <div class="chart-bar">
-                    <div class="bar-fill" id="joshBar" style="width: 0%;"></div>
-                </div>
-                <div class="chart-value">∞ times</div>
-            </div>
-
-            <div class="chart-row">
-                <div class="chart-label">
-                    <img src="https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/josh_monocle.jpeg" alt="Josh monocle" class="avatar">
-                    <div>Brittany (His actual wife)</div>
-                </div>
-                <div class="chart-bar">
-                    <div class="bar-fill" style="width: 0%; background: linear-gradient(90deg, #ff6b35, #d4af37);">0</div>
-                </div>
-                <div class="chart-value">0 websites (but she's a saint for putting up with him)</div>
-            </div>
-
-            <div class="chart-row">
-                <div class="chart-label">
-                    <div>Tim's Impulse Purchases</div>
-                </div>
-                <div class="chart-bar">
-                    <div class="bar-fill" id="impulseBar" style="width: 0%;"></div>
-                </div>
-                <div class="chart-value">2 cars + 47 watches</div>
-            </div>
-        </div>
-    </section>
-
-    <section id="pokemonSection">
-        <h2>Newly Discovered Pokemon</h2>
-        <p style="color: #b0b0b0; margin-bottom: 30px;">Researchers found this one hiding from his own birthday party.</p>
-        <img src="https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/tim_pokemon_card.png" alt="TIMOTHEUS Pokemon Card - HP 420 - Low-Key Spiraling and Tryhard Beam" style="max-width: 380px; width: 95%; border-radius: 16px; box-shadow: 0 10px 40px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.15); transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.03) rotateY(3deg)'" onmouseout="this.style.transform='scale(1)'">
-        <p style="color: #888; font-size: 0.8rem; margin-top: 15px; font-style: italic;">"Owns multiple controllers. Still blames lag." - 1st Edition, obviously.</p>
-    </section>
-
-    <section id="motivationSection" class="motivation-section">
-        <h2>You Got This, Tim! (Probably)</h2>
-
-        <img src="https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/high_jump_fail.gif" alt="Guy failing at high jump" class="motivation-image">
-
-        <p class="motivation-text">This is basically how Tim approaches every challenge.</p>
-
-        <img src="https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/figure_it_out.jpeg" alt="Tim finding a way to make it work" class="motivation-image">
-
-        <p class="image-caption">Tim finding a way to make it work, as usual.</p>
-
-        <p class="motivation-text">And somehow, he always figures it out.</p>
-    </section>
-
-    <section id="complimentSection">
-        <h2>Compliment Generator</h2>
-        <p>Click the button to generate genuine compliments (which is a rarity).</p>
-
-        <div class="button-group">
-            <button id="complimentButton">GENERATE COMPLIMENT</button>
+        <!-- Insult Generator Section -->
+        <div class="section">
+            <h2>The Insult Generator</h2>
+            <p>Generate a unique roast for Tim:</p>
+            <button onclick="generateInsult()">Generate Insult</button>
+            <div class="result-display hidden" id="insultResult"></div>
+            <div id="insultDisplay"></div>
         </div>
 
-        <div class="compliment-box">
-            <span class="compliment-text" id="complimentText">Click the button, you coward.</span>
+        <!-- Pokemon Card Section -->
+        <div class="section">
+            <h2>Tim's Pokemon Card</h2>
+            <p>What Pokemon is Tim?</p>
+            <button onclick="generatePokemonCard()">Generate Tim's Pokemon</button>
+            <div id="pokemonDisplay"></div>
         </div>
 
-        <div class="compliment-counter">
-            <span id="complimentCounter">0/10 compliments unlocked</span>
+        <!-- Image Gallery Section -->
+        <div class="section">
+            <h2>Image Gallery</h2>
+            <p>Some memorable moments:</p>
+            <div id="imageGallery"></div>
         </div>
-    </section>
-
-    <section id="quizSection">
-        <h2>Tim Trivia Challenge</h2>
-        <p>How well do you know yourself? (Spoiler: not very well.)</p>
-
-        <div class="quiz-question">
-            <p>In 2026, how many impulse car purchases have you made in the past 3 years?</p>
-            <div class="quiz-options">
-                <label class="quiz-option">
-                    <input type="radio" name="question1" value="0"> None, I'm responsible.
-                </label>
-                <label class="quiz-option">
-                    <input type="radio" name="question1" value="1"> One. That's normal, right?
-                </label>
-                <label class="quiz-option">
-                    <input type="radio" name="question1" value="2"> Two. Maybe three. Numbers are hard.
-                </label>
-                <label class="quiz-option">
-                    <input type="radio" name="question1" value="3"> I've lost count. Brittany definitely has.
-                </label>
-            </div>
-        </div>
-
-        <div class="quiz-question">
-            <p>Your Pokemon card collection represents:</p>
-            <div class="quiz-options">
-                <label class="quiz-option">
-                    <input type="radio" name="question2" value="0"> A childhood nostalgia project.
-                </label>
-                <label class="quiz-option">
-                    <input type="radio" name="question2" value="1"> A serious investment portfolio.
-                </label>
-                <label class="quiz-option">
-                    <input type="radio" name="question2" value="2"> An undiagnosed obsession.
-                </label>
-                <label class="quiz-option">
-                    <input type="radio" name="question2" value="3"> Brittany's reason for couples therapy.
-                </label>
-            </div>
-        </div>
-
-        <div class="quiz-question">
-            <p>You took a Comic-Con trip to Calgary with Josh because:</p>
-            <div class="quiz-options">
-                <label class="quiz-option">
-                    <input type="radio" name="question3" value="0"> You're cultured and enjoy conventions.
-                </label>
-                <label class="quiz-option">
-                    <input type="radio" name="question3" value="1"> Josh convinced you it was a good idea.
-                </label>
-                <label class="quiz-option">
-                    <input type="radio" name="question3" value="2"> It sounded like an adventure.
-                </label>
-                <label class="quiz-option">
-                    <input type="radio" name="question3" value="3"> You were trying to escape Brittany's disappointment in your spending habits.
-                </label>
-            </div>
-        </div>
-
-        <button id="submitQuiz">SUBMIT ANSWERS</button>
-
-        <div id="quizResult" style="display: none;"></div>
-    </section>
-
-    <section id="rsvpSection" class="rsvp-section">
-        <p class="fancy-text">You Are Cordially Invited</p>
-
-        <div class="coupon-teaser">
-            In honor of your birthday, you will receive ONE (1) coupon, redeemable for anything you want at Waffle House or McDonald's. But first, you must prove yourself worthy by completing this entire page.
-        </div>
-
-        <div class="button-group">
-            <button id="yesButton">YES, I'M IN</button>
-            <button id="noButton">NO, I'M LAME</button>
-        </div>
-    </section>
-
-    <section id="closingSection" class="closing-section">
-        <h2>The Real Stuff</h2>
-
-        <img src="https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/tim_and_josh.jpeg" alt="Tim and Josh with cigars" class="closing-image">
-
-        <img src="https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/bachelor_party.jpeg" alt="Group party photo" class="closing-image">
-
-        <img src="https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/tim_career.jpeg" alt="Tim at tech conference" class="closing-image">
-
-        <div class="fourth-wall">
-            <p>Okay, real talk for a second. (Josh here, fourth wall be damned.)</p>
-        </div>
-
-        <p class="closing-text">
-            Tim, you're a weird dude. You buy watches like other people buy groceries. Your Pokemon card collection confuses everyone who knows you. You'd rather reschedule plans than just show up to them. And yet, somehow, you've built this life that works. You've got Brittany, who is either the most patient woman alive or running a long con we don't understand yet. You've got people who care about you, even when you text them back like you're on dial-up. You got the glow-up that nobody expected. You became the guy who figures it out, no matter how improbable the situation.
-        </p>
-
-        <p class="closing-text">
-            The Comic-Con trip to Calgary with you was one of my favorite memories. Watching you discover new things, laugh at weird niche stuff, just exist without overthinking for a few days. That's the version of you that makes 47 look pretty good.
-        </p>
-
-        <p class="closing-text">
-            Brittany deserves a medal, several vacations, and probably some kind of saint certification, but she keeps showing up. You somehow turned "I should maybe take fitness more seriously" into a complete transformation. And you did it your way, which is the most Tim thing possible.
-        </p>
-
-        <p class="closing-text">
-            So on your 47th birthday, here's what I want you to know: You're worth celebrating. Not despite the weird spending habits, not despite the impulse purchases, not despite texting like a caveman. Because of the weird dude you've chosen to be, and because you've actually built something good.
-        </p>
-
-        <p class="closing-text">
-            Happy birthday, you beautiful disaster.
-        </p>
-    </section>
-
-    <section id="lootBoxSection" class="loot-box-section">
-        <h2>Your Birthday Present</h2>
-        <p>You made it. Click the box.</p>
-
-        <div class="loot-box locked" id="lootBox">
-            <span id="lootBoxIcon">????</span>
-        </div>
-
-        <p id="lockMessage" style="color: #b0b0b0; font-style: italic;">Complete all sections above to unlock this present.</p>
-
-        <div id="couponContainer" style="display: none;">
-            <div class="coupon-card" id="couponCard">
-                <img src="https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/josh_monocle.jpeg" alt="Chief Coupon Officer" class="coupon-issuer">
-
-                <div class="coupon-title">OFFICIAL BIRTHDAY COUPON</div>
-
-                <div class="coupon-detail">
-                    This entitles Timothy<br>
-                    to ONE (1) free item
-                </div>
-
-                <div class="coupon-detail" style="margin: 25px 0;">
-                    Redeemable at:<br>
-                    Waffle House or McDonald's
-                </div>
-
-                <div class="coupon-detail">
-                    Issued by:<br>
-                    Josh Bowman<br>
-                    Chief Coupon Officer
-                </div>
-
-                <div class="coupon-fine-print">
-                    <p>* Expires April 28, 2026.</p>
-                    <p>* Limit one (1) coupon per birthday. Tim only gets one birthday per year, despite what his Amazon wishlist suggests.</p>
-                    <p>* Non-transferable. Brittany cannot use this coupon, though she deserves one of her own for putting up with you.</p>
-                    <p>* Maximum value: $15. If you somehow spend $15 at Waffle House, Josh will be both impressed and concerned.</p>
-                    <p>* Coupon issuer reserves the right to order the same thing and pretend it was his idea.</p>
-                    <p>* Not valid at any establishment where Tim has been banned for talking about Pokemon cards too loudly.</p>
-                    <p>* By accepting this coupon, Tim agrees to text Josh back within 48 hours for the next 30 days.</p>
-                    <p>* Void where prohibited by Josh's mood, budget, or energy level.</p>
-                    <p>* This coupon was designed by an AI at 3am and reviewed by zero legal professionals.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
 
     <script>
-        const completionState = {
-            gayButton: false,
-            friendshipChart: false,
-            complimentGenerated: false,
-            quizSubmitted: false,
-            rsvpClicked: false
-        };
-
-        const compliments = [
-            "You've somehow convinced a saint to marry you. That takes actual talent.",
-            "Your glow-up was real. Those 100 lbs didn't stand a chance against your determination.",
-            "Brittany is a saint. Seriously. Nominate her for something.",
-            "You made Comic-Con in Calgary memorable. That's not nothing.",
-            "The UNCW scholarship was huge. You should be proud of that.",
-            "You figured out steaks. That's a win in anyone's book.",
-            "You share your life with someone, and that someone chose to stay. That says something.",
-            "You actually show up for people who matter. Even if it takes you a while to text back.",
-            "47 and still learning new things about yourself. Not everyone does that.",
-            "You're the guy who figures it out. Everyone knows that about you."
-        ];
-
-        const insults = [
-            "Tim, you're 47 now. Your metabolism left the chat years ago. Ozempic is doing all the heavy lifting.",
-            "You have the texting speed of a man who just discovered phones exist.",
-            "Your Pokemon card collection is a cry for help disguised as a hobby.",
-            "Brittany deserves a medal. Actually, several medals. And a vacation. Without you.",
-            "You bought a new car three years in a row. That's not a hobby, Tim. That's a condition.",
-            "47 years old and still scared of birthday parties. That's not quirky. That's a therapy bill.",
-            "Your commander deck is bad and you should feel bad. (I bought it, so that's on me.)",
-            "You can't text back, but you can buy Pokemon cards at midnight. Your priorities are weird.",
-            "Brittany doesn't put up with your spending habits. She endures them. There's a difference.",
-            "You've turned impulse buying into an art form. It's not a hobby, it's a lifestyle."
-        ];
-
-        let complimentIndex = 0;
-        let insultIndex = 0;
-        let isInsultMode = false;
+        // Initialize progress tracker
+        const progressFill = document.querySelector('.progress-fill');
+        let completedTasks = 0;
+        const totalTasks = 4; // Loot box, insult, pokemon, images
 
         function updateProgress() {
-            const completed = Object.values(completionState).filter(v => v).length;
-            const total = Object.keys(completionState).length;
-
-            document.getElementById('progressFill').style.width = (completed / total) * 100 + '%';
-            document.getElementById('progressText').textContent = completed + '/' + total;
-
-            const allComplete = completed === total;
-            const lootBox = document.getElementById('lootBox');
-            const lockMessage = document.getElementById('lockMessage');
-
-            if (allComplete) {
-                lootBox.classList.remove('locked');
-                lootBox.classList.add('unlocked');
-                lootBox.textContent = '🎁';
-                lockMessage.style.display = 'none';
-            }
+            const percentage = (completedTasks / totalTasks) * 100;
+            progressFill.style.width = percentage + '%';
         }
 
-        document.getElementById('scanButton').addEventListener('click', function() {
-            completionState.gayButton = true;
+        // Loot Box Logic
+        const lootItems = [
+            "A lifetime supply of bad decisions",
+            "The ability to read your own handwriting (cursed)",
+            "A participation trophy from 1987",
+            "Socks that always go missing",
+            "The sacred knowledge of why birds aren't real",
+            "A coupon for 0% off anything",
+            "Tim's dignity (sorry, out of stock)",
+            "The power to stub your toe regularly",
+            "A genuine compliment from the internet",
+            "A void of purpose and meaning (jk, you got friends)",
+            "A signed photo of yourself (unsigned)",
+            "The ability to organize your life (placeholder)",
+            "A refund for your birth certificate",
+            "A lifetime of 404 errors",
+            "The secrets of the universe (terms & conditions apply)",
+            "A gift card to a store that doesn't exist",
+            "Proof that aliens visit Florida",
+            "A time machine (broken)",
+            "The blueprints to happiness (assembly required)"
+        ];
+
+        const lootBox = document.getElementById('lootBox');
+        const lootResult = document.getElementById('lootResult');
+
+        lootBox.addEventListener('click', function() {
+            const randomLoot = lootItems[Math.floor(Math.random() * lootItems.length)];
+            lootResult.textContent = `"${randomLoot}"`;
+            lootResult.classList.remove('hidden');
+            playSuccessSound();
+            confetti();
+            completedTasks = Math.max(completedTasks, 1);
             updateProgress();
-
-            const scanResult = document.getElementById('scanResult');
-            scanResult.innerHTML = '<div class="scan-result">SCANNING...</div>';
-
-            setTimeout(() => {
-                scanResult.innerHTML = '<div class="scan-result">Results: Yes. Obviously.</div>';
-                document.getElementById('picard').style.display = 'block';
-                document.getElementById('picard-caption').style.display = 'block';
-            }, 1500);
         });
 
-        window.addEventListener('load', function() {
-            completionState.friendshipChart = true;
+        // Insult Generator
+        const insultAdjectives = [
+            "magnificently confused",
+            "spectacularly average",
+            "delightfully obsolete",
+            "charming disaster",
+            "wonderfully lost",
+            "perfectly unremarkable",
+            "gloriously mediocre",
+            "epically forgettable",
+            "exceptionally peculiar"
+        ];
+
+        const insultNouns = [
+            "piece of software",
+            "life choice",
+            "birthday attempt",
+            "existence",
+            "sense of direction",
+            "fashion statement",
+            "joke at a dinner party",
+            "conversation starter",
+            "reference in a conversation"
+        ];
+
+        const insultVerbs = [
+            "confuses",
+            "baffles",
+            "perplexes",
+            "astounds",
+            "mystifies",
+            "bewilders",
+            "surprises",
+            "leaves people wondering about"
+        ];
+
+        function generateInsult() {
+            const adj = insultAdjectives[Math.floor(Math.random() * insultAdjectives.length)];
+            const noun = insultNouns[Math.floor(Math.random() * insultNouns.length)];
+            const verb = insultVerbs[Math.floor(Math.random() * insultVerbs.length)];
+
+            const insult = `Tim, you are a ${adj} ${noun} that ${verb} everyone around you.`;
+            const insultDisplay = document.getElementById('insultDisplay');
+            insultDisplay.innerHTML = `<div class="insult-display">${insult}</div>`;
+            
+            completedTasks = Math.max(completedTasks, 2);
             updateProgress();
+            playSuccessSound();
+        }
 
-            const bars = ['joshBar', 'impulseBar'];
-            const targets = [100, 95];
+        // Pokemon Card Generator
+        const pokemonTraits = [
+            { name: "Timosaurus", type: "Dragon/Confused", hp: 45, attack: 72, defense: 66 },
+            { name: "Confusdle", type: "Psychic/Lost", hp: 58, attack: 62, defense: 55 },
+            { name: "Awkwardile", type: "Normal/Shy", hp: 52, attack: 48, defense: 48 },
+            { name: "Questionmark", type: "Fairy/Mystery", hp: 65, attack: 58, defense: 65 },
+            { name: "Paradoxian", type: "Psychic/Paradox", hp: 55, attack: 67, defense: 72 },
+            { name: "Timidly", type: "Grass/Nervous", hp: 48, attack: 65, defense: 45 },
+            { name: "Blunderblast", type: "Electric/Chaotic", hp: 64, attack: 80, defense: 50 },
+            { name: "Enigmon", type: "Water/Enigma", hp: 62, attack: 66, defense: 68 }
+        ];
 
-            bars.forEach((id, index) => {
-                const element = document.getElementById(id);
-                const target = targets[index];
-                let current = 0;
-                const increment = target / 20;
-
-                const interval = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(interval);
-                    }
-                    element.style.width = current + '%';
-                }, 100);
-            });
-        });
-
-        document.getElementById('complimentButton').addEventListener('click', function() {
-            completionState.complimentGenerated = true;
-            updateProgress();
-
-            const complimentText = document.getElementById('complimentText');
-            const counter = document.getElementById('complimentCounter');
-            const button = document.getElementById('complimentButton');
-            const box = document.querySelector('.compliment-box');
-
-            if (!isInsultMode) {
-                if (complimentIndex < compliments.length) {
-                    complimentText.textContent = compliments[complimentIndex];
-                    complimentIndex++;
-                    counter.textContent = complimentIndex + '/10 compliments unlocked';
-
-                    playDingSound();
-
-                    if (complimentIndex === compliments.length) {
-                        setTimeout(() => {
-                            button.textContent = 'GENERATE AN INSULT';
-                            button.style.background = 'linear-gradient(135deg, #9d4edd 0%, #7209b7 100%)';
-                            button.style.borderColor = '#9d4edd';
-                            box.classList.remove('compliment-box');
-                            box.classList.add('insult-box');
-                            isInsultMode = true;
-                            counter.textContent = '10/10 compliments unlocked. Want some insults instead?';
-                        }, 500);
-                    }
-                }
-            } else {
-                if (insultIndex < insults.length) {
-                    complimentText.textContent = insults[insultIndex];
-                    insultIndex++;
-
-                    playBuzzerSound();
-
-                    if (insultIndex === insults.length) {
-                        setTimeout(() => {
-                            complimentText.textContent = 'OK fine, I still love you. Happy birthday, old man.';
-                            button.textContent = 'YOU ARE LOVED';
-                            button.style.background = 'linear-gradient(135deg, #d4af37 0%, #ffd700 100%)';
-                            button.style.borderColor = '#d4af37';
-                            button.style.color = '#1a1a1a';
-                        }, 500);
-                    }
-                }
-            }
-        });
-
-        document.getElementById('submitQuiz').addEventListener('click', function() {
-            completionState.quizSubmitted = true;
-            updateProgress();
-
-            const q1 = document.querySelector('input[name="question1"]:checked');
-            const q2 = document.querySelector('input[name="question2"]:checked');
-            const q3 = document.querySelector('input[name="question3"]:checked');
-
-            if (!q1 || !q2 || !q3) {
-                alert('Answer all questions, you coward!');
-                return;
-            }
-
-            const score = parseInt(q1.value) + parseInt(q2.value) + parseInt(q3.value);
-            const resultDiv = document.getElementById('quizResult');
-            const resultElement = document.createElement('div');
-            resultElement.className = 'quiz-result';
-
-            let resultText = 'Your Score: It Doesn\'t Matter';
-            if (score >= 6) {
-                resultText += '<br>You know yourself. That\'s terrifying.';
-            } else if (score >= 3) {
-                resultText += '<br>You\'re figuring it out. Progress.';
-            } else {
-                resultText += '<br>You have no idea. Classic Tim.';
-            }
-
+        function generatePokemonCard() {
+            const pokemon = pokemonTraits[Math.floor(Math.random() * pokemonTraits.length)];
+            const pokemonDisplay = document.getElementById('pokemonDisplay');
+            
+            pokemonDisplay.innerHTML = `
+                <div class="pokemon-card">
+                    <h3>${pokemon.name}</h3>
+                    <p style="color: #ff6b35;"><strong>Type:</strong> ${pokemon.type}</p>
+                    <div class="pokemon-image">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="${pokemon.name}">
+                    </div>
+                    <div class="pokemon-stats">
+                        <div class="stat"><span class="stat-label">HP</span><br>${pokemon.hp}</div>
+                        <div class="stat"><span class="stat-label">ATK</span><br>${pokemon.attack}</div>
+                        <div class="stat"><span class="stat-label">DEF</span><br>${pokemon.defense}</div>
+                        <div class="stat"><span class="stat-label">SPE</span><br>${Math.floor(Math.random() * 80) + 30}</div>
+                    </div>
+                </div>
+            `;
+            
+            const resultElement = pokemonDisplay.querySelector('.pokemon-card');
             const promotedImg = document.createElement('img');
             promotedImg.src = 'https://raw.githubusercontent.com/Thebowshow-dev/happy-birthday-tim/main/promoted.jpeg';
             promotedImg.alt = 'Promoted';
             promotedImg.style.maxWidth = '100%';
             promotedImg.style.marginTop = '15px';
             promotedImg.style.borderRadius = '8px';
-
-            resultElement.innerHTML = resultText;
             resultElement.appendChild(promotedImg);
-            resultDiv.innerHTML = '';
-            resultDiv.appendChild(resultElement);
-            resultDiv.style.display = 'block';
-        });
-
-        document.getElementById('yesButton').addEventListener('click', function() {
-            completionState.rsvpClicked = true;
+            
+            completedTasks = Math.max(completedTasks, 3);
             updateProgress();
-            alert('Excellent choice. Waffle House or McDonald\'s awaits!');
-        });
+            playSuccessSound();
+        }
 
-        document.getElementById('noButton').addEventListener('click', function() {
-            completionState.rsvpClicked = true;
-            updateProgress();
-            alert('Brittany would be disappointed. Reconsider.');
-        });
-
-        document.getElementById('lootBox').addEventListener('click', function() {
-            if (!this.classList.contains('unlocked')) {
-                return;
-            }
-
-            this.classList.remove('unlocked');
-            this.classList.add('shaking');
-
-            setTimeout(() => {
-                this.classList.remove('shaking');
-                this.classList.add('glowing');
-            }, 2000);
-
-            setTimeout(() => {
-                this.classList.remove('glowing');
-                this.style.opacity = '0';
-                this.style.pointerEvents = 'none';
-
-                const couponContainer = document.getElementById('couponContainer');
-                couponContainer.style.display = 'block';
-
-                const couponCard = document.getElementById('couponCard');
-                couponCard.classList.add('revealed');
-
-                confetti({
-                    particleCount: 100,
-                    spread: 70,
-                    origin: { y: 0.6 }
-                });
-
-                playFanfareSound();
-
-                document.getElementById('lockMessage').style.display = 'none';
-            }, 4000);
-        });
-
-        function playDingSound() {
+        // Sound Effects
+        function playSuccessSound() {
             const audioContext = new (window.AudioContext || window.webkitAudioContext)();
             const oscillator = audioContext.createOscillator();
             const gainNode = audioContext.createGain();
@@ -1118,12 +492,14 @@
             oscillator.connect(gainNode);
             gainNode.connect(audioContext.destination);
 
-            oscillator.frequency.value = 800;
+            oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+            oscillator.frequency.linearRampToValueAtTime(1200, audioContext.currentTime + 0.1);
+
             gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
 
             oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + 0.3);
+            oscillator.stop(audioContext.currentTime + 0.1);
         }
 
         function playBuzzerSound() {
@@ -1142,27 +518,6 @@
 
             oscillator.start(audioContext.currentTime);
             oscillator.stop(audioContext.currentTime + 0.3);
-        }
-
-        function playFanfareSound() {
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const notes = [523, 659, 784, 1047]; // C5, E5, G5, C6
-            const duration = 0.2;
-
-            notes.forEach((freq, index) => {
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-
-                oscillator.frequency.value = freq;
-                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime + index * duration);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + index * duration + duration);
-
-                oscillator.start(audioContext.currentTime + index * duration);
-                oscillator.stop(audioContext.currentTime + index * duration + duration);
-            });
         }
 
         updateProgress();
